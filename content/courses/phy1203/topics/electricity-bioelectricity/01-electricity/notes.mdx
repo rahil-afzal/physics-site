@@ -4,3 +4,666 @@ lecture: 1
 title: Electricity
 status: developing
 ---
+
+{/* Converted from Charges_Current.pdf (Lecture Notes: Electricity). Source text kept unchanged. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## Introduction: Why Electricity Is the Language of Life
+
+Before the 19th century, electricity and life were thought to be entirely separate domains of nature. Luigi Galvani's famous 1780 experiment — where a dissected frog's leg twitched when touched with two different metals — shattered that boundary forever. We now know that every cell in your body is an electrical device.
+
+Consider: your heart beats because of an electrical signal that sweeps across cardiac muscle 60–100 times per minute. Your brain processes this sentence using electrical impulses travelling at up to 120 m/s along nerve fibres. Every muscle contraction, every sensory perception, every hormone release is ultimately triggered by an electrical event at a cell membrane. Even DNA replication depends on the electrostatic forces between charged molecules.
+
+This lecture covers the physical principles of electricity: charge, fields, potential, current, resistance, capacitance, and circuits — and connects each concept directly to the biological systems that exploit them.
+
+## 1. Electric Charge and Coulomb's Law
+
+### 1.1 Electric Charge
+
+<Callout type="definition" title="Definition: Electric Charge">
+
+Electric charge is a fundamental property of matter. It comes in two types: positive (protons, $+e$) and negative (electrons, $-e$). Like charges repel; unlike charges attract. The elementary charge is $e = 1.602\times10^{-19}\ \mathrm{C}$ (coulombs).
+
+</Callout>
+
+Charge is conserved. It can be transferred between objects but never created or destroyed. This is why the total charge inside a living cell remains constant even as ions rush in and out through channels.
+
+{/* FLAG (physics check): "total charge inside a living cell remains constant" — ions crossing the membrane do change the cell's net charge (by a very small amount). Conservation holds for cell plus surroundings. */}
+
+| Ion | Charge | Inside cell (mM) | Outside cell (mM) |
+|---|---|---|---|
+| $\mathrm{Na^+}$ | $+e$ | 12 | 145 |
+| $\mathrm{K^+}$ | $+e$ | 140 | 5 |
+| $\mathrm{Cl^-}$ | $-e$ | 4 | 116 |
+| $\mathrm{Ca^{2+}}$ | $+2e$ | 0.0001 | 2 |
+
+These gradients of charge across the cell membrane are the source of all bioelectrical phenomena.
+
+### 1.2 Coulomb's Law
+
+<Callout type="note" title="Result: Coulomb's Law">
+
+The electrostatic force between two point charges $q_1$ and $q_2$ separated by distance $r$:
+
+$$
+F = k_e\,\frac{\lvert q_1 q_2\rvert}{r^2}, \qquad k_e = 8.99\times10^{9}\ \mathrm{N\,m^2/C^2}
+$$
+
+Attractive if the charges are opposite; repulsive if they are the same sign. Force falls as $1/r^2$ — the same inverse-square law as gravity.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Gravity vs. Electrostatics">
+
+Coulomb's law and Newton's gravity law are structurally identical: $F = G m_1 m_2/r^2$ vs. $F = k_e q_1 q_2/r^2$. The key difference: gravity is always attractive; electrostatic forces can be either attractive or repulsive. Also, $k_e \approx 10^{40}$ times larger than $G$, meaning the electric force between a proton and electron is $\sim 10^{39}$ times stronger than their gravitational attraction. Atoms are held together by electricity, not gravity.
+
+</Callout>
+
+{/* FLAG (physics check): k_e and G have different units, and k_e/G is about 1e20, not 1e40. The 1e39 figure is the proton-electron force ratio (it includes the particle masses and charges). */}
+
+<Callout type="example" title="Example: Force Between Ions">
+
+A $\mathrm{Na^+}$ ion ($q_1 = +e$) and $\mathrm{Cl^-}$ ion ($q_2 = -e$) are separated by $r = 0.28\ \mathrm{nm}$ (typical ionic bond length in NaCl crystal):
+
+$$
+F = k_e\frac{e^2}{r^2} = \frac{8.99\times10^{9}\times(1.6\times10^{-19})^2}{(2.8\times10^{-10})^2} \approx 2.94\times10^{-9}\ \mathrm{N}
+$$
+
+This $\approx 3\ \mathrm{nN}$ force is small in everyday terms, but it is enormous relative to the mass of an ion (producing accelerations $\sim 10^{18}\ \mathrm{m/s^2}$). It is this force that drives ions through open channels and holds protein structures together.
+
+</Callout>
+
+{/* FLAG (check): a = F/m with m of about 4e-26 kg (Na+) gives about 7e16 m/s^2, i.e. of order 1e17 rather than 1e18. */}
+
+<Callout type="note" title="Biological Connection: Electrostatics in Molecular Biology">
+
+- **Protein folding.** Oppositely charged amino acid side-chains form *salt bridges* — electrostatic bonds that stabilise the 3-D fold. Disrupting them (e.g., by changing pH, which alters charge states) causes protein denaturation.
+- **DNA double helix.** The phosphate groups on DNA's backbone carry a negative charge. The double helix is therefore strongly anionic; positively charged histone proteins wrap around it to compact it into chromatin.
+- **Enzyme–substrate binding.** Many enzymes use positively charged residues in their active site to attract negatively charged substrates.
+- **Drug design.** Drugs are often designed with specific charge distributions to dock electrostatically with their target protein.
+
+</Callout>
+
+## 2. Electric Field and Electric Potential
+
+### 2.1 Electric Field
+
+<Callout type="definition" title="Definition: Electric Field">
+
+The electric field $\vec{E}$ at a point in space is the force per unit positive test charge placed at that point:
+
+$$
+\vec{E} = \frac{\vec{F}}{q}, \qquad \lvert\vec{E}\rvert = k_e\frac{\lvert Q\rvert}{r^2}
+$$
+
+Units: V/m (volts per metre) = N/C. Direction: outward from positive charges, inward toward negative charges.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Field Lines as a Map">
+
+Think of the electric field like a topographic map of a hillside. The hill (positive charge) pushes a ball (positive test charge) outward in all directions; a valley (negative charge) pulls it inward. Field lines show the direction a positive charge would naturally move — from high electric potential (hilltop) to low (valley). Where lines are dense, the field is strong; where they are sparse, it is weak.
+
+</Callout>
+
+### 2.2 Electric Potential
+
+<Callout type="note" title="Result: Electric Potential and Potential Difference">
+
+Electric potential $V$ at a distance $r$ from a point charge $Q$:
+
+$$
+V = k_e\frac{Q}{r}
+$$
+
+Units: Volts ($\mathrm{V} = \mathrm{J/C}$). The potential difference $\Delta V = V_B - V_A$ between two points is the work done per unit charge moving a positive charge from $A$ to $B$. A positive charge moves naturally from high to low potential (downhill); a negative charge moves from low to high.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Potential as Electrical Height">
+
+Electric potential is exactly analogous to gravitational height. A ball rolls downhill (from high gravitational PE to low). A positive ion drifts toward lower electric potential; a negative ion drifts toward higher potential. The membrane potential $V_m \approx -70\ \mathrm{mV}$ means the inside of the cell is 70 mV lower (more negative) than the outside. The inside is like a valley for positive ions, pulling them inward through any open channel.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Membrane Potential">
+
+The resting membrane potential of a typical neuron is $V_m \approx -70\ \mathrm{mV}$. This arises from the combined effect of:
+
+- The concentration gradient of ions (especially $\mathrm{K^+}$ high inside, $\mathrm{Na^+}$ high outside).
+- The electrical gradient pulling ions opposite to their concentration gradient.
+- The $\mathrm{Na^+/K^+}$-ATPase pump that actively restores gradients, consuming 1 ATP to move 3 $\mathrm{Na^+}$ out and 2 $\mathrm{K^+}$ in — net outward positive charge, maintaining the negative resting potential.
+
+At rest, the membrane is most permeable to $\mathrm{K^+}$ (through leak channels), so $V_m$ is close to but slightly above the $\mathrm{K^+}$ Nernst potential of $-90\ \mathrm{mV}$.
+
+</Callout>
+
+## 3. Capacitance and the Membrane as a Capacitor
+
+<Callout type="definition" title="Definition: Capacitance">
+
+A capacitor stores electric charge on two conducting surfaces separated by an insulator (dielectric). Capacitance $C$ is defined as:
+
+$$
+C = \frac{Q}{V}, \qquad [C] = \text{Farad (F)}
+$$
+
+For a parallel-plate capacitor of plate area $A$, plate separation $d$, and permittivity $\varepsilon = \varepsilon_0\varepsilon_r$:
+
+$$
+C = \varepsilon\frac{A}{d} = \varepsilon_0\varepsilon_r\frac{A}{d}
+$$
+
+where $\varepsilon_0 = 8.85\times10^{-12}\ \mathrm{F/m}$ and $\varepsilon_r$ is the relative permittivity of the insulating material.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Capacitor as a Water Tank">
+
+Think of a capacitor as a water tank with a rubber membrane stretched across the middle. Water (charge) can accumulate on one side, stretching the membrane and building up pressure (voltage). The bigger the tank (larger $A$), the more water it holds at the same pressure — larger capacitance. The thicker the membrane (larger $d$), the harder it is to stretch — smaller capacitance.
+
+</Callout>
+
+<Callout type="note" title="Result: Energy Stored in a Capacitor">
+
+$$
+U = \tfrac{1}{2}CV^2 = \frac{Q^2}{2C} = \tfrac{1}{2}QV
+$$
+
+All three forms are equivalent; use whichever variables are given.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: The Cell Membrane as a Capacitor">
+
+The cell membrane is a phospholipid bilayer approximately 5–7 nm thick. On either side are conducting ionic solutions (cytoplasm inside, extracellular fluid outside). This is a textbook parallel-plate capacitor:
+
+- **Conductors:** intracellular and extracellular fluid.
+- **Insulator:** the hydrophobic lipid bilayer ($\varepsilon_r \approx 2$).
+- **Plate separation:** $d \approx 5\ \mathrm{nm}$.
+- **Specific capacitance:** $\approx 1\ \mu\mathrm{F/cm^2}$ — remarkably consistent across almost all cell types, suggesting it is set by the universal bilayer structure.
+
+**Why does capacitance matter for neurons?** When a voltage pulse arrives, the neuron must charge its membrane capacitor before the voltage can change. A larger membrane (more area $A$) has larger $C$, requiring more charge to change $V_m$ by the same amount — so large neurons respond more slowly. Myelination dramatically reduces effective $C$ by increasing $d$ (the myelin wrapping is a thick insulator), allowing rapid signal propagation.
+
+</Callout>
+
+{/* FLAG (check 1): the stated d of 5 nm and eps_r of 2 give about 0.35 uF/cm^2 from C = eps0 eps_r / d, not 1 uF/cm^2. */}
+
+{/* FLAG (check 2): "large neurons respond more slowly" holds only at fixed total R_m. With fixed specific properties, tau = r_m c_m does not depend on cell size. */}
+
+<Callout type="example" title="Example: Membrane Capacitance Calculation">
+
+A spherical cell of radius $r = 10\ \mu\mathrm{m}$ has membrane area $A = 4\pi r^2 = 4\pi(10^{-5})^2 = 1.26\times10^{-9}\ \mathrm{m^2} = 1.26\times10^{-5}\ \mathrm{cm^2}$.
+
+With specific capacitance $c_m = 1\ \mu\mathrm{F/cm^2}$:
+
+$$
+C_m = c_m \times A = 1\times10^{-6}\times 1.26\times10^{-5} = 1.26\times10^{-11}\ \mathrm{F} = 12.6\ \mathrm{pF}
+$$
+
+Energy stored at resting potential $V_m = 70\ \mathrm{mV}$:
+
+$$
+U = \tfrac{1}{2}C_m V_m^2 = \tfrac{1}{2}(1.26\times10^{-11})(0.07)^2 \approx 3.1\times10^{-14}\ \mathrm{J}
+$$
+
+This tiny energy must be restored after every action potential by the ATP-powered $\mathrm{Na^+/K^+}$ pump.
+
+</Callout>
+
+## 4. Current, Resistance, and Ohm's Law
+
+### 4.1 Electric Current
+
+<Callout type="definition" title="Definition: Electric Current">
+
+Current is the rate of charge flow:
+
+$$
+I = \frac{\Delta Q}{\Delta t}, \qquad [I] = \text{Ampere (A)} = \mathrm{C/s}
+$$
+
+Conventional current flows in the direction positive charges move (from high to low potential). In biological systems, current is carried by ions (not electrons), moving through aqueous solution and ion channels.
+
+</Callout>
+
+<Callout type="note" title="Note: Biological Current Magnitudes">
+
+Biological currents are tiny by household standards but enormous at the single-channel level:
+
+| Biological event | Current |
+|---|---|
+| Single ion channel (open) | ∼ 1–10 pA |
+| Axon action potential | ∼ 1–100 nA |
+| Cardiac pacemaker cell | ∼ 1 µA |
+| Whole-heart ECG surface current | ∼ 1 mA |
+
+</Callout>
+
+### 4.2 Resistance and Ohm's Law
+
+<Callout type="note" title="Result: Resistance and Ohm's Law">
+
+The resistance of a conductor of length $L$, cross-section $A$, and resistivity $\rho$ (material property):
+
+$$
+R = \rho\frac{L}{A}, \qquad [R] = \Omega\ \text{(ohm)}
+$$
+
+Ohm's Law (for ohmic, i.e., linear, conductors):
+
+$$
+V = IR
+$$
+
+</Callout>
+
+<Callout type="note" title="Analogy: Water Pipe Analogy — The Complete Picture">
+
+The water pipe analogy is the most powerful tool for intuition:
+
+| Electrical | Hydraulic |
+|---|---|
+| Voltage $V$ (V) | Pressure difference (Pa) |
+| Current $I$ (A) | Flow rate ($\mathrm{m^3/s}$) |
+| Resistance $R$ ($\Omega$) | Fluidic resistance |
+| Capacitance $C$ (F) | Elastic reservoir |
+| Charge $Q$ (C) | Volume of water |
+| Conductor wire | Wide pipe (low resistance) |
+| Thin wire / resistor | Narrow pipe (high resistance) |
+| Open switch | Closed valve |
+| Battery | Pump |
+
+Ohm's law $V = IR$ is perfectly analogous to Poiseuille's law $\Delta P = Q\cdot R_{\text{fluid}}$ from the fluid mechanics lecture.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Ion Channels as Resistors">
+
+Each type of ion channel has a characteristic conductance $g = 1/R$ (siemens, S). A typical single channel has $g \approx 10$–$100\ \mathrm{pS}$.
+
+- Closed channel $\equiv$ infinite resistance / zero conductance.
+- Open channel $\equiv$ finite resistance, allowing ion flow.
+- The more channels open, the lower the total membrane resistance, and the larger the current for a given driving voltage.
+- Drugs that block channels (e.g. tetrodotoxin blocks $\mathrm{Na^+}$ channels) increase membrane resistance and prevent action potentials — used as a model toxin in neuroscience research.
+
+</Callout>
+
+## 5. Kirchhoff's Laws and Circuit Analysis
+
+<Callout type="note" title="Result: Kirchhoff's Laws">
+
+**Kirchhoff's Current Law (KCL)** — conservation of charge:
+
+$$
+\sum I_{\text{in}} = \sum I_{\text{out}} \quad \text{at any junction}
+$$
+
+**Kirchhoff's Voltage Law (KVL)** — conservation of energy:
+
+$$
+\sum_{\text{loop}} V = 0 \quad \text{around any closed loop}
+$$
+
+</Callout>
+
+<Callout type="note" title="Analogy: KCL as a River Junction">
+
+At a river confluence (junction), the total water flowing in equals the total flowing out — water doesn't pile up at the junction. This is KCL: charge doesn't accumulate at a node (under steady state). At a river fork (branching axon), the flow splits between branches according to their widths (conductances).
+
+</Callout>
+
+<Callout type="note" title="Result: Series and Parallel Resistance">
+
+**Series:** $R_{\text{eq}} = R_1 + R_2 + \cdots$ (same current through each; voltages add)
+
+**Parallel:** $\dfrac{1}{R_{\text{eq}}} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots$ (same voltage across each; currents add)
+
+</Callout>
+
+<Callout type="example" title="Example: Worked Circuit — Kirchhoff's Laws">
+
+A 12 V battery drives current through $R_1 = 100\ \Omega$ in series with $R_2 = 150\ \Omega$ and $R_3 = 300\ \Omega$ in parallel.
+
+**Step 1 — Parallel combination:**
+
+$$
+\frac{1}{R_{23}} = \frac{1}{150} + \frac{1}{300} = \frac{2}{300} + \frac{1}{300} = \frac{3}{300} \quad\Rightarrow\quad R_{23} = 100\ \Omega
+$$
+
+**Step 2 — Total resistance:**
+
+$$
+R_{\text{eq}} = R_1 + R_{23} = 100 + 100 = 200\ \Omega
+$$
+
+**Step 3 — Total current (KVL on outer loop):**
+
+$$
+I_1 = \frac{V}{R_{\text{eq}}} = \frac{12}{200} = 0.06\ \mathrm{A} = 60\ \mathrm{mA}
+$$
+
+**Step 4 — Branch currents (KCL at node):**
+
+Voltage across the parallel pair: $V_{23} = I_1\times R_{23} = 0.06\times100 = 6\ \mathrm{V}$
+
+$$
+I_2 = \frac{V_{23}}{R_2} = \frac{6}{150} = 0.04\ \mathrm{A}, \qquad I_3 = \frac{V_{23}}{R_3} = \frac{6}{300} = 0.02\ \mathrm{A}
+$$
+
+Check KCL: $I_2 + I_3 = 0.04 + 0.02 = 0.06 = I_1$ ✓
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: KCL at an Axon Branch Point">
+
+When a nerve axon branches into two daughter fibres at a node, the ionic current carried by the action potential must split between the two branches according to their conductances (inverse resistances). A thicker axon (lower $R$) carries more current. If one branch has much higher resistance (e.g. a thin branch to a small muscle fibre), it receives less current. Kirchhoff's current law determines exactly how much current each branch receives, and therefore whether the action potential can propagate into that branch at all.
+
+</Callout>
+
+## 6. RC Circuits and Bioelectric Membranes
+
+<Callout type="definition" title="Definition: RC Circuit">
+
+A resistor $R$ in series with a capacitor $C$ connected to a voltage source $V_0$. The voltage across the capacitor changes exponentially, governed by the time constant $\tau = RC$.
+
+</Callout>
+
+<Callout type="note" title="Result: RC Charging and Discharging">
+
+**Charging:**
+
+$$
+V_C(t) = V_0\left(1 - e^{-t/RC}\right)
+$$
+
+**Discharging:**
+
+$$
+V_C(t) = V_0\,e^{-t/RC}
+$$
+
+At $t = \tau$: $V_C \approx 63\%$ of final value (charging) or $37\%$ remaining (discharging). After $5\tau$, the capacitor is considered fully charged/discharged ($>99\%$).
+
+</Callout>
+
+<Callout type="note" title="Analogy: RC Charging as Filling a Leaky Bucket">
+
+Imagine filling a bucket (capacitor) with water from a tap through a narrow nozzle (resistor). At first, water rushes in quickly (large current) because the bucket is empty. As the bucket fills, back-pressure builds and the flow slows. Eventually the flow almost stops — i.e. the bucket is charged. Pull out the plug (discharge) and the bucket empties fast at first, then slower. The narrower the nozzle ($R$), or the larger the bucket ($C$), the slower the process — the larger $\tau = RC$.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Neuron Membrane — A Biological RC Circuit">
+
+The neuron membrane combines resistance (ion channels, $R_m$) and capacitance (lipid bilayer, $C_m$) in a parallel RC arrangement. The membrane time constant:
+
+$$
+\tau_m = R_m C_m
+$$
+
+determines how quickly the membrane potential responds to a stimulus.
+
+For a typical neuron: $R_m = 40\ \mathrm{M\Omega}$, $C_m = 200\ \mathrm{pF}$:
+
+$$
+\tau_m = 40\times10^{6}\times200\times10^{-12} = 8\times10^{-3}\ \mathrm{s} = 8\ \mathrm{ms}
+$$
+
+A stimulus briefer than $\sim\tau_m$ is blurred out by the membrane capacitance. Fast-signalling interneurons have small $\tau_m$ (by reducing $R_m$ through more open channels); integrating neurons have large $\tau_m$ (to average inputs over time).
+
+**Clinical relevance:** General anaesthetics partially block $\mathrm{Na^+}$ channels ($\uparrow R_m \Rightarrow \uparrow\tau_m$), slowing neuronal response and suppressing consciousness.
+
+</Callout>
+
+{/* FLAG (biology claim to verify): the anaesthetic mechanism given here (Na+ channel block raising R_m) looks oversimplified. Many general anaesthetics act mainly by enhancing GABA-A (chloride) conductance, which lowers R_m. */}
+
+## 7. Ohmic Current and the Nernst Potential
+
+### 7.1 Ohmic (Driving-Force) Current Through Ion Channels
+
+The current through an ion channel is not simply $V/R$. What matters is not the membrane potential alone, but how far the membrane potential is from the equilibrium potential of that particular ion.
+
+<Callout type="note" title="Result: Ohmic Current Through an Ion Channel">
+
+$$
+I_x = g_x\,(V_m - E_x)
+$$
+
+- $I_x$ — current of ion $x$ (A); positive = outward current
+- $g_x$ — membrane conductance for ion $x$ ($\mathrm{S} = \mathrm{A/V}$ = siemens)
+- $V_m$ — membrane potential (V)
+- $E_x$ — Nernst (equilibrium) potential for ion $x$ (V)
+
+</Callout>
+
+<Callout type="note" title="Analogy: Driving Force as Net Pressure">
+
+Think of ion current like water through a pipe where both a pump (concentration gradient) and gravity (electrical gradient) are acting. If the pump exactly cancels gravity, there is no net flow — this is the equilibrium potential $E_x$. The quantity $(V_m - E_x)$ is the **driving force**: positive driving force pushes current out; negative pushes it in. Opening more channels (increasing $g_x$) amplifies whichever direction the driving force dictates.
+
+</Callout>
+
+<Callout type="note" title="Note: Sign Convention and Current Direction">
+
+- If $V_m > E_x$: driving force is positive, ion $x$ current is outward (leaving the cell, conventionally positive for a positive ion).
+- If $V_m < E_x$: driving force is negative, ion $x$ current is inward.
+- If $V_m = E_x$: driving force is zero; no net current even if many channels are open.
+
+This is why $\mathrm{Na^+}$ channels, once open during an action potential, drive the membrane toward $E_{\mathrm{Na}} \approx +60\ \mathrm{mV}$ and then current stops — it cannot overshoot the Nernst potential.
+
+</Callout>
+
+{/* FLAG (consistency): E_Na is given as about +60 mV here but +67 mV in section 7.2 and section 8. */}
+
+### 7.2 The Nernst Potential
+
+<Callout type="note" title="Derivation: Why the Nernst Potential Exists">
+
+An ion $X$ is at equilibrium when two opposing tendencies exactly cancel:
+
+1. **Concentration gradient:** ion $X$ diffuses from high $[X]$ to low $[X]$ (random thermal motion).
+2. **Electrical gradient:** the membrane voltage creates an electric force opposing diffusion (since the diffusing ion carries charge).
+
+At equilibrium the electrochemical potential is equal on both sides. Setting the entropy-driven diffusion energy equal to the electrical work gives the Nernst equation.
+
+</Callout>
+
+<Callout type="note" title="Result: Nernst Equation">
+
+$$
+E_x = \frac{RT}{zF}\ln\frac{[X]_{\text{out}}}{[X]_{\text{in}}}
+$$
+
+- $R = 8.314\ \mathrm{J/(mol\,K)}$ — gas constant
+- $T$ — absolute temperature (K)
+- $z$ — ionic valence (e.g. $+1$ for $\mathrm{K^+}$, $-1$ for $\mathrm{Cl^-}$, $+2$ for $\mathrm{Ca^{2+}}$)
+- $F = 96{,}485\ \mathrm{C/mol}$ — Faraday constant
+
+At body temperature ($T = 310\ \mathrm{K}$), $RT/F \approx 26.7\ \mathrm{mV}$, so:
+
+$$
+E_x \approx \frac{26.7}{z}\ln\frac{[X]_{\text{out}}}{[X]_{\text{in}}}\ \mathrm{mV}
+\quad\text{or}\quad
+\frac{61.5}{z}\log_{10}\frac{[X]_{\text{out}}}{[X]_{\text{in}}}\ \mathrm{mV}
+$$
+
+</Callout>
+
+<Callout type="example" title="Example: Nernst Potentials for Key Ions at 310 K">
+
+Using intracellular and extracellular concentrations from the table in Section 1:
+
+**Potassium** $\mathrm{K^+}$ ($z=+1$):
+
+$$
+E_{\mathrm{K}} = 26.7\ln\frac{5}{140} = 26.7\times(-3.332) \approx -89\ \mathrm{mV}
+$$
+
+**Sodium** $\mathrm{Na^+}$ ($z=+1$):
+
+$$
+E_{\mathrm{Na}} = 26.7\ln\frac{145}{12} = 26.7\times2.493 \approx +67\ \mathrm{mV}
+$$
+
+**Chloride** $\mathrm{Cl^-}$ ($z=-1$):
+
+$$
+E_{\mathrm{Cl}} = \frac{26.7}{-1}\ln\frac{116}{4} = -26.7\times3.367 \approx -90\ \mathrm{mV}
+$$
+
+**Calcium** $\mathrm{Ca^{2+}}$ ($z=+2$):
+
+$$
+E_{\mathrm{Ca}} = \frac{26.7}{2}\ln\frac{2}{0.0001} = 13.35\times9.903 \approx +132\ \mathrm{mV}
+$$
+
+The resting membrane potential ($-70\ \mathrm{mV}$) lies between $E_{\mathrm{K}}$ and $E_{\mathrm{Na}}$, pulled toward $E_{\mathrm{K}}$ by the high resting $\mathrm{K^+}$ permeability.
+
+</Callout>
+
+<Figure caption="Nernst potentials of K⁺, Cl⁻, Na⁺ and Ca²⁺ compared with the resting membrane potential (bar chart from the source notes)." />
+
+<Callout type="note" title="Biological Connection: Goldman Equation — Extending the Nernst Equation">
+
+The resting membrane potential is not set by a single ion but by all permeable ions simultaneously. The Goldman–Hodgkin–Katz (GHK) equation generalises the Nernst equation:
+
+$$
+V_m = \frac{RT}{F}\ln\frac{P_{\mathrm{K}}[\mathrm{K^+}]_o + P_{\mathrm{Na}}[\mathrm{Na^+}]_o + P_{\mathrm{Cl}}[\mathrm{Cl^-}]_i}{P_{\mathrm{K}}[\mathrm{K^+}]_i + P_{\mathrm{Na}}[\mathrm{Na^+}]_i + P_{\mathrm{Cl}}[\mathrm{Cl^-}]_o}
+$$
+
+where $P_x$ is the permeability of ion $x$. At rest, $P_{\mathrm{K}} \gg P_{\mathrm{Na}}$, so $V_m \approx E_{\mathrm{K}}$. During an action potential, $\mathrm{Na^+}$ channels open, $P_{\mathrm{Na}}$ surges, and $V_m$ shifts rapidly toward $E_{\mathrm{Na}} \approx +67\ \mathrm{mV}$. This is the physical basis of the depolarisation phase.
+
+</Callout>
+
+## 8. Action Potential and Ion Dynamics
+
+The action potential (AP) is the neuron's binary signal — an all-or-nothing electrical event that propagates without decrement along the axon. It is the physical implementation of neural computation.
+
+<Callout type="note" title="Note: All-or-Nothing Principle">
+
+If a stimulus depolarises the membrane beyond the threshold ($\approx -55\ \mathrm{mV}$), a full action potential fires. A smaller stimulus produces no AP at all. The AP amplitude is always the same ($\approx 110\ \mathrm{mV}$ swing). Information is encoded not in AP amplitude but in firing rate and temporal pattern.
+
+</Callout>
+
+### 8.1 Five Phases of the Action Potential
+
+**Phase 1. Resting state** ($V_m \approx -70\ \mathrm{mV}$). $\mathrm{Na^+}$ and $\mathrm{K^+}$ voltage-gated channels are closed. Only leak $\mathrm{K^+}$ channels are open, maintaining resting potential near $E_{\mathrm{K}}$.
+
+**Phase 2. Depolarisation.** A stimulus raises $V_m$ above threshold ($-55\ \mathrm{mV}$). Voltage-gated $\mathrm{Na^+}$ channels open (positive feedback: more depolarisation $\Rightarrow$ more channels open $\Rightarrow$ more depolarisation — the *Hodgkin cycle*). $V_m$ swings rapidly toward $E_{\mathrm{Na}} \approx +67\ \mathrm{mV}$, reaching $\approx +40\ \mathrm{mV}$.
+
+**Phase 3. Repolarisation.** $\mathrm{Na^+}$ channels inactivate (a separate gate closes from the cytoplasmic side). Voltage-gated $\mathrm{K^+}$ channels open (they respond to depolarisation but with a time delay). $\mathrm{K^+}$ rushes out, pulling $V_m$ back toward $E_{\mathrm{K}} \approx -89\ \mathrm{mV}$.
+
+**Phase 4. Hyperpolarisation (after-potential).** $\mathrm{K^+}$ channels close slowly. The excess $\mathrm{K^+}$ efflux temporarily drives $V_m$ below resting potential to $\approx -80\ \mathrm{mV}$.
+
+**Phase 5. Return to rest.** $\mathrm{K^+}$ channels finally close; the $\mathrm{Na^+/K^+}$-ATPase pump restores ion gradients over milliseconds to seconds.
+
+<Figure caption="Action potential waveform, membrane potential (mV) against time (ms), with threshold at −55 mV, rest at −70 mV, and the five phases labelled (figure from the source notes)." />
+
+<Callout type="note" title="Biological Connection: Refractory Period and Signal Directionality">
+
+During and shortly after an AP, the membrane cannot fire again. The **absolute refractory period** ($\sim1\ \mathrm{ms}$) corresponds to $\mathrm{Na^+}$ channel inactivation — the channels are physically blocked and cannot reopen regardless of stimulus strength. The **relative refractory period** ($\sim2$–$4\ \mathrm{ms}$) corresponds to $\mathrm{K^+}$ channels still open and $V_m$ below resting — a stronger stimulus is needed to reach threshold.
+
+The refractory period is biologically crucial: it limits maximum firing rate ($\sim500$–$1000\ \mathrm{Hz}$) and ensures APs propagate only forward along the axon — the region just behind the AP front is refractory and cannot re-fire.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Myelination and Saltatory Conduction">
+
+Unmyelinated axons conduct APs at 0.5–2 m/s. Myelin (produced by Schwann cells in the PNS and oligodendrocytes in the CNS) wraps around the axon in concentric layers, dramatically increasing effective membrane resistance and decreasing capacitance — both of which speed conduction. The AP jumps between exposed nodes of Ranvier at 70–120 m/s — a 50–100$\times$ speedup.
+
+In multiple sclerosis, demyelination slows or blocks conduction, producing the characteristic symptoms of muscle weakness, visual disturbance, and fatigue.
+
+</Callout>
+
+## 9. The Hodgkin–Huxley Equivalent Circuit
+
+Alan Hodgkin and Andrew Huxley (Nobel Prize 1963) described the neuron membrane as an electrical circuit. This model remains the gold standard of computational neuroscience.
+
+<Figure caption="Hodgkin–Huxley equivalent circuit between outside and inside: membrane capacitance C_m in parallel with the branches g_Na (with E_Na), g_K (with E_K) and g_L (with E_L). g_Na and g_K are time-varying; g_L is constant. V_m is the voltage across the circuit (figure from the source notes)." />
+
+<Callout type="note" title="Note: Reading the HH Circuit">
+
+- $C_m$: membrane capacitance (lipid bilayer).
+- $g_{\mathrm{Na}}(t)$: time-varying $\mathrm{Na^+}$ conductance (voltage-gated channels).
+- $g_{\mathrm{K}}(t)$: time-varying $\mathrm{K^+}$ conductance.
+- $E_{\mathrm{Na}}$, $E_{\mathrm{K}}$: batteries representing Nernst potentials — the source of energy driving ion currents.
+- $V_m$: voltage across the capacitor (membrane potential).
+
+The circuit equation is:
+
+$$
+C_m\frac{dV_m}{dt} = -g_{\mathrm{Na}}(V_m - E_{\mathrm{Na}}) - g_{\mathrm{K}}(V_m - E_{\mathrm{K}}) - g_L(V_m - E_L) + I_{\text{ext}}
+$$
+
+where $g_L$ is the leak conductance and $I_{\text{ext}}$ is any applied current. This single equation generates the complete action potential waveform when $g_{\mathrm{Na}}$ and $g_{\mathrm{K}}$ are described by Hodgkin–Huxley kinetics.
+
+</Callout>
+
+## 10. End-of-Chapter Exercises
+
+{/* FLAG (pedagogy): A1, A3, A4, A7 and A8 repeat the worked examples in sections 1.2, 3, 5 and 7.2 with the same numbers. */}
+
+### Part A: Mathematical Problems
+
+**A1. Coulomb's Law.** A $\mathrm{Na^+}$ ion ($+e$) and a $\mathrm{Cl^-}$ ion ($-e$) are separated by $r = 0.28\ \mathrm{nm}$ in aqueous solution (treat as free charges). Calculate the electrostatic force. Is it attractive or repulsive?
+
+**A2. Electric Potential.** A charge $Q = +5\times10^{-9}\ \mathrm{C}$ is fixed at the origin. Calculate the electric potential at $r = 5\ \mathrm{cm}$.
+
+**A3. Membrane Capacitance.** A spherical cell of radius $r = 10\ \mu\mathrm{m}$ has specific membrane capacitance $c_m = 1\ \mu\mathrm{F/cm^2}$. (a) Calculate the total membrane capacitance $C_m$. (b) How much charge $Q$ is stored at resting potential $V_m = 70\ \mathrm{mV}$? (c) Calculate the energy stored $U$.
+
+**A4. Circuit Analysis (KCL/KVL).** A 12 V battery, $R_1 = 100\ \Omega$ in series, $R_2 = 150\ \Omega$ and $R_3 = 300\ \Omega$ in parallel. Find total current, branch currents, and voltage drop across $R_1$.
+
+**A5. RC Time Constant.** A neuron has $R_m = 20\ \mathrm{M\Omega}$ and $C_m = 0.5\ \mu\mathrm{F}$. (a) Calculate $\tau$. (b) What fraction of the final voltage is reached after $t = 2\tau$? (c) After how long (in $\tau$) is 95% of the final voltage reached?
+
+{/* FLAG (probable typo): 20 MOhm times 0.5 uF gives tau = 10 s, far from neuronal time scales. The lecture example uses C_m = 200 pF. Perhaps 0.5 nF (tau = 10 ms) was intended. */}
+
+**A6. Power Dissipation.** An ion channel carries a current $I = 50\ \mathrm{pA}$ at a driving force of $V_m - E_x = -65\ \mathrm{mV}$. Calculate the power dissipated.
+
+**A7. Nernst Potential.** Calculate the Nernst potential for $\mathrm{K^+}$ at $T = 310\ \mathrm{K}$, given $[\mathrm{K^+}]_{\text{in}} = 140\ \mathrm{mM}$ and $[\mathrm{K^+}]_{\text{out}} = 5\ \mathrm{mM}$.
+
+**A8. Nernst Potential — Calcium.** $\mathrm{Ca^{2+}}$ has $[\mathrm{Ca^{2+}}]_{\text{in}} = 0.0001\ \mathrm{mM}$ and $[\mathrm{Ca^{2+}}]_{\text{out}} = 2\ \mathrm{mM}$ at $T = 310\ \mathrm{K}$. Calculate $E_{\mathrm{Ca}}$.
+
+**A9. Ohmic Current.** A membrane has $\mathrm{K^+}$ conductance $g_{\mathrm{K}} = 5\ \mathrm{nS}$ and $E_{\mathrm{K}} = -90\ \mathrm{mV}$. If $V_m = -70\ \mathrm{mV}$: (a) Calculate $I_{\mathrm{K}}$. (b) State the direction of $\mathrm{K^+}$ current (inward or outward).
+
+**A10. Parallel Resistance Network.** Three ion channel types have conductances $g_1 = 10\ \mathrm{nS}$, $g_2 = 5\ \mathrm{nS}$, $g_3 = 2\ \mathrm{nS}$. They are all open simultaneously. Find the total membrane conductance and total resistance $R_m$.
+
+### Part B: Conceptual Questions
+
+**B1.** Why do membranes act as capacitors? Explain in terms of the physical structure of the lipid bilayer. What would happen to the capacitance if the bilayer became thinner (as in some genetic disorders)?
+
+**B2.** Explain how the opening of $\mathrm{Na^+}$ channels during an action potential changes (a) membrane conductance, (b) membrane resistance, (c) the direction of ionic current. Use the driving force concept $(V_m - E_{\mathrm{Na}})$.
+
+**B3.** The Nernst potential for $\mathrm{K^+}$ is $\approx -90\ \mathrm{mV}$ and for $\mathrm{Na^+}$ is $\approx +67\ \mathrm{mV}$. The resting membrane potential is $\approx -70\ \mathrm{mV}$. Which ion is closer to equilibrium at rest? What does this imply about which ion carries most of the resting current?
+
+**B4.** Describe how Kirchhoff's current law applies to a branching axon. If one branch has twice the diameter of the other, how does this affect the fraction of current entering each branch?
+
+**B5.** A patient is given a drug that increases membrane resistance $R_m$ tenfold while leaving $C_m$ unchanged. How does the membrane time constant $\tau_m$ change? How does this affect the neuron's ability to follow rapidly changing inputs?
+
+**B6.** During hyperpolarisation (Phase 4 of the action potential), the membrane potential briefly drops below $E_{\mathrm{K}}$. Use the driving force equation to explain why $\mathrm{K^+}$ current reverses direction during this phase.
+
+{/* FLAG (physics, premise of B6): the notes give the undershoot as about -80 mV and E_K as about -89 mV, so V_m stays above E_K. The driving force V_m - E_K stays positive and the K+ current stays outward (only smaller). It does not reverse. */}
+
+**B7.** The all-or-nothing principle states that APs are either full-size or absent. Yet neurons encode information about stimulus intensity. How is this possible?
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Coulomb's Law | $F = k_e\lvert q_1 q_2\rvert/r^2$ |
+| Electric Field | $E = F/q = k_e Q/r^2$ |
+| Electric Potential | $V = k_e Q/r$ |
+| Capacitance | $C = Q/V = \varepsilon A/d$ |
+| Energy in capacitor | $U = \tfrac{1}{2}CV^2$ |
+| Current | $I = \Delta Q/\Delta t$ |
+| Resistance | $R = \rho L/A$ |
+| Ohm's Law | $V = IR$ |
+| RC time constant | $\tau = RC$ |
+| Charging | $V_C = V_0\left(1 - e^{-t/RC}\right)$ |
+| Discharging | $V_C = V_0\,e^{-t/RC}$ |
+| Ion channel current | $I_x = g_x(V_m - E_x)$ |
+| Nernst Potential | $E_x = \dfrac{RT}{zF}\ln\dfrac{[X]_{\text{out}}}{[X]_{\text{in}}}$ |
+| KCL | $\sum I_{\text{in}} = \sum I_{\text{out}}$ |
+| KVL | $\sum_{\text{loop}} V = 0$ |
+
+## References
+
+1. Hille, B. *Ion Channels of Excitable Membranes*, 3rd ed. Sinauer Associates, 2001. The definitive reference on ion channel biophysics. Chapters 1–4 cover the Nernst and Goldman equations, ohmic current, and channel conductance in authoritative detail. Essential reading for anyone serious about membrane electricity.
+2. Johnston, D. and Wu, S. M.-S. *Foundations of Cellular Neurophysiology*. MIT Press, 1995. An exceptionally clear textbook bridging physics and neurobiology. Chapters 2–6 derive the cable equation, the RC membrane model, action potential theory, and the Hodgkin–Huxley equations from first principles. Highly recommended for students who want to understand the mathematics behind the biology.
