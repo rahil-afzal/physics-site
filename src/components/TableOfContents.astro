@@ -1,0 +1,18 @@
+---
+interface Props { items: { depth: number; slug: string; text: string }[] }
+const { items } = Astro.props;
+---
+<details class="toc" id="toc">
+  <summary>On this page</summary>
+  <nav aria-label="Table of contents">
+    <ol>{items.map((h) => <li class={`d${h.depth}`}><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+  </nav>
+</details>
+<script>
+  // Open by default on wide screens (sticky sidebar); collapsed on phones.
+  const d = document.getElementById('toc') as HTMLDetailsElement | null;
+  const mq = matchMedia('(min-width: 64rem)');
+  const sync = () => { if (d) d.open = mq.matches; };
+  sync();
+  mq.addEventListener('change', sync);
+</script>

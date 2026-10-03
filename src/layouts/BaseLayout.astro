@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+import 'katex/dist/katex.min.css';
+import { site } from '../site.config';
+import { url } from '../lib/content';
+const { title, description } = Astro.props;
+const full = title === site.title ? title : `${title} · ${site.title}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>{full}</title>
+    {description && <meta name="description" content={description} />}
+    <script is:inline>
+      try { var t = localStorage.getItem('theme'); } catch (e) {}
+      document.documentElement.dataset.theme = t || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site">
+      <a class="brand" href={url('/')}>{site.author}</a>
+      <button id="theme" type="button" aria-label="Toggle light/dark mode">Light / Dark</button>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site"><p>{site.author}</p></footer>
+    <script>
+      document.getElementById('theme')?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        try { localStorage.setItem('theme', next); } catch {}
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../components/Breadcrumbs.astro';
+import Status from '../../../../components/Status.astro';
+import ResourceLinks from '../../../../components/ResourceLinks.astro';
+import { getTree, url } from '../../../../lib/content';
+import { mdxComponents } from '../../../../lib/mdx';
+
+export async function getStaticPaths() {
+  return (await getTree()).flatMap((root) =>
+    root.topics.map((topic) => ({ params: { kind: root.kind, slug: root.slug, topic: topic.slug }, props: { root, topic } })));
+}
+const { root, topic } = Astro.props;
+const d = topic.entry?.data;
+const Content = topic.entry ? (await render(topic.entry)).Content : null;
+---
+<Base title={topic.title} description={d?.description}>
+  <div class="narrow">
+    <Breadcrumbs items={[{ label: root.entry.data.course_code ?? root.entry.data.title, href: root.href }, { label: topic.title }]} />
+    <h1>{topic.title}<Status status={d?.status} /></h1>
+    {d?.description && <p class="lede">{d.description}</p>}
+    {Content && <div class="prose"><Content components={mdxComponents} /></div>}
+    <ResourceLinks links={d?.links} />
+    <h2>Lectures</h2>
+    {topic.lectures.length === 0 ? <p class="muted">No lectures yet.</p> : (
+      <ol class="index">
+        {topic.lectures.map((l) => (
+          <li>
+            <a href={url(l.href)}>{l.title}</a><Status status={l.entry.data.status} />
+            {l.entry.data.description && <div class="meta">{l.entry.data.description}</div>}
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</Base>

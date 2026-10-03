@@ -1,0 +1,11 @@
+---
+import { Image } from 'astro:assets';
+import { url } from '../lib/content';
+const { src, alt = '', caption } = Astro.props;
+---
+<figure class="figure">
+  {src
+    ? typeof src === 'string' ? <img src={url(src)} alt={alt} loading="lazy" /> : <Image src={src} alt={alt} />
+    : <div class="fig-slot"><slot>Figure placeholder</slot></div>}
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

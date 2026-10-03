@@ -1,0 +1,54 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../../../components/Breadcrumbs.astro';
+import Status from '../../../../../components/Status.astro';
+import ResourceLinks from '../../../../../components/ResourceLinks.astro';
+import TableOfContents from '../../../../../components/TableOfContents.astro';
+import { getTree, url } from '../../../../../lib/content';
+import { mdxComponents } from '../../../../../lib/mdx';
+
+export async function getStaticPaths() {
+  const paths: any[] = [];
+  for (const root of await getTree()) {
+    const flat = root.topics.flatMap((topic) => topic.lectures.map((lecture) => ({ topic, lecture })));
+    flat.forEach(({ topic, lecture }, i) =>
+      paths.push({
+        params: { kind: root.kind, slug: root.slug, topic: topic.slug, lecture: lecture.slug },
+        props: { root, topic, lecture, prev: flat[i - 1]?.lecture, next: flat[i + 1]?.lecture },
+      }));
+  }
+  return paths;
+}
+const { root, topic, lecture, prev, next } = Astro.props;
+const d = lecture.entry.data;
+const hasBody = !!lecture.entry.body?.trim();
+const { Content, headings } = await render(lecture.entry);
+const toc = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+const hasToc = toc.length >= 4; // "long enough" threshold
+---
+<Base title={d.title} description={d.description}>
+  <Breadcrumbs items={[
+    { label: root.entry.data.course_code ?? root.entry.data.title, href: root.href },
+    { label: topic.title, href: topic.href },
+    { label: d.title },
+  ]} />
+  <article class:list={['lecture', hasToc && 'has-toc']} data-pagefind-body>
+    <header class="lecture-head">
+      <p class="meta">{topic.title}{d.lecture !== undefined ? ` · Lecture ${d.lecture}` : ''}<Status status={d.status} /></p>
+      <h1>{d.title}</h1>
+      {d.description && <p class="lede">{d.description}</p>}
+      <ResourceLinks links={d.links} />
+    </header>
+    {hasToc && <TableOfContents items={toc} />}
+    <div class="lecture-body">
+      <div class="prose">
+        {hasBody ? <Content components={mdxComponents} /> : <p class="muted">Notes for this lecture have not been written yet.</p>}
+      </div>
+      <nav class="pager" aria-label="Lecture navigation">
+        {prev && <a class="prev" href={url(prev.href)}><small>← Previous</small>{prev.title}</a>}
+        {next && <a class="next" href={url(next.href)}><small>Next →</small>{next.title}</a>}
+      </nav>
+    </div>
+  </article>
+</Base>

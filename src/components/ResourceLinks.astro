@@ -1,0 +1,9 @@
+---
+import { url } from '../lib/content';
+const { links = [] } = Astro.props;
+---
+{links.length > 0 && (
+  <ul class="links" aria-label="Supporting resources">
+    {links.map((l: { label: string; href: string }) => <li><a href={url(l.href)}>{l.label}</a></li>)}
+  </ul>
+)}

@@ -1,0 +1,4 @@
+---
+const { status } = Astro.props;
+---
+{status && status !== 'taught' && <span class="status">{status}</span>}

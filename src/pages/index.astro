@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/BaseLayout.astro';
+import Status from '../components/Status.astro';
+import { site } from '../site.config';
+import { getTree, url } from '../lib/content';
+const tree = await getTree();
+const groups = [['courses', 'University courses'], ['resources', 'Standalone resources']] as const;
+---
+<Base title={site.title} description={site.tagline}>
+  <div class="narrow">
+    <h1>{site.title}</h1>
+    <p class="lede">{site.author} · {site.tagline}</p>
+    {groups.map(([kind, label]) => {
+      const items = tree.filter((r) => r.kind === kind);
+      return items.length > 0 && (
+        <section>
+          <h2>{label}</h2>
+          <ul class="index">
+            {items.map((r) => (
+              <li>
+                <a href={url(r.href)}>{r.entry.data.course_code ? `${r.entry.data.course_code} — ` : ''}{r.entry.data.title}</a>
+                <Status status={r.entry.data.status} />
+                <div class="meta">{[r.entry.data.audience, r.entry.data.description].filter(Boolean).join(' · ')}</div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+</Base>
