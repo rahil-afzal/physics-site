@@ -1,6 +1,294 @@
 ---
 type: lecture
 lecture: 1
-title: Basic Principles of Magnetism
+title: Magnetism
 status: developing
 ---
+
+{/* Converted from Magnetism.pdf (Lecture Notes: Basic Principles of NMR and MRI), part 1 of 3: introduction and source sections 1-5. Source text and section numbers kept unchanged so the notes' internal cross-references still hold (sections 1-5 here, 6-9 in NMR, 10-12 in MRI). Scope: the defined scope of the PHY 1203 NMR/MRI material ends at MRI signal detection (source section 12); source sections 13-25 and problems P8-P13 are intentionally not converted. Exercises renumbered: P1-P4 = source P1-P4. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## Introduction: From a Magnet to an Image
+
+Magnetic Resonance Imaging (MRI) lets physicians see inside a living body in exquisite detail, without a single X-ray photon. It does this by exploiting a property of atomic nuclei called spin, combined with strong magnets, radio waves, and a century of electromagnetic theory.
+
+This lecture builds MRI from the ground up. We start with ordinary magnetism — the kind you learned with bar magnets and compass needles — and walk forward, one physical idea at a time, until we reach the complete chain that turns a patient lying in a scanner into a cross-sectional image of their brain:
+
+nuclear spin → magnetic moment → $B_0$ → Larmor precession → RF excitation → transverse magnetization → relaxation → signal detection → spatial encoding → $k$-space → Fourier reconstruction → MRI image
+
+Every arrow in that chain is a physical process you will understand by the end of this lecture. We will not need graduate-level quantum mechanics or electromagnetic theory — just the physics you already have, applied carefully and built up one step at a time.
+
+{/* FLAG (scope): this introduction promises the complete chain through relaxation, spatial encoding, k-space and image reconstruction. The defined scope ends at MRI signal detection (source section 12). Text kept unchanged; trim the chain and the closing paragraph if you want the intro to match the scope. */}
+
+## 1. Magnetism and Magnetic Fields
+
+<Callout type="definition" title="Definition: Magnetic Field">
+
+A magnetic field $\vec{B}$ is a vector field that describes the magnetic influence surrounding a magnet or a moving electric charge. Its SI unit is the tesla (T). Magnetic field lines point from a magnet's north pole to its south pole outside the magnet, and form closed loops (unlike electric field lines, which begin and end on charges).
+
+</Callout>
+
+<Figure caption="Bar magnet with its north (N) and south (S) poles labelled (figure from the source notes)." />
+
+<Callout type="note" title="Note: Where Magnetic Fields Come From">
+
+Every magnetic field in nature is ultimately produced by moving electric charge — either macroscopic current in a wire, or the intrinsic circulating behaviour of charged particles at the atomic scale. A bar magnet's field comes from the aligned magnetic moments of its atoms. This is also, eventually, how an MRI scanner's main magnet works: a current flowing continuously around a coil.
+
+</Callout>
+
+{/* FLAG (consistency): "intrinsic circulating behaviour of charged particles" reads as classical rotation, while section 6 states that spin is not literal rotation. */}
+
+## 2. The Biot–Savart Law
+
+<Callout type="note" title="Result: Biot–Savart Law">
+
+A current element $I\,d\vec{\ell}$ produces a magnetic field at a point a distance $r$ away:
+
+$$
+d\vec{B} = \frac{\mu_0}{4\pi}\,\frac{I\,d\vec{\ell}\times\hat{r}}{r^2}
+$$
+
+where $\mu_0 = 4\pi\times10^{-7}\ \mathrm{T\,m/A}$ is the permeability of free space. The total field is found by integrating over the entire current path.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Biot–Savart as a Sum of Tiny Contributions">
+
+Just as Coulomb's law gives the field from one point charge and you add up contributions from many charges to get a total electric field, the Biot–Savart law gives the field from one tiny piece of current-carrying wire, and you add up (integrate) over the whole wire to get the total magnetic field. The direction of each tiny contribution follows a right-hand rule: point your fingers along the current, curl them toward the field point, and your thumb points along $d\vec{B}$.
+
+</Callout>
+
+### 2.1 Long Straight Wire
+
+<Callout type="note" title="Result: Field of a Long Straight Wire">
+
+Integrating the Biot–Savart law over an infinite straight wire gives a simple result: at perpendicular distance $r$ from the wire,
+
+$$
+B = \frac{\mu_0 I}{2\pi r}
+$$
+
+The field lines are circles centred on the wire, in the plane perpendicular to it.
+
+</Callout>
+
+<Figure caption="Long straight wire carrying current I, with the magnetic field B at perpendicular distance r (figure from the source notes)." />
+
+<Callout type="example" title="Example: Field Near a Wire">
+
+A wire carries $I = 10\ \mathrm{A}$. Find $B$ at $r = 1\ \mathrm{cm}$.
+
+$$
+B = \frac{\mu_0 I}{2\pi r} = \frac{(4\pi\times10^{-7})(10)}{2\pi(0.01)} = 2\times10^{-4}\ \mathrm{T} = 0.2\ \mathrm{mT}
+$$
+
+For comparison, an MRI main field is 1.5–3 T — about 10,000 times stronger than this simple wire's field at 1 cm. This is exactly why MRI magnets use many tightly-wound, high-current coils rather than a single wire.
+
+</Callout>
+
+### 2.2 Circular Current Loop
+
+<Callout type="note" title="Result: Field on the Axis of a Current Loop">
+
+For a circular loop of radius $R$ carrying current $I$, the field at the centre of the loop is:
+
+$$
+B_{\text{centre}} = \frac{\mu_0 I}{2R}
+$$
+
+For $N$ turns stacked together (a coil), multiply by $N$: $B_{\text{centre}} = \mu_0 N I/2R$.
+
+</Callout>
+
+<Figure caption="Circular current loop of radius R carrying current I, with the field B on the axis (figure from the source notes)." />
+
+<Callout type="note" title="Biological Connection: RF and Gradient Coils">
+
+Every coil inside an MRI scanner — the transmit/receive RF coil, the gradient coils that encode spatial position (Sections 18–21) — is, at heart, an engineered arrangement of current loops, each one obeying exactly the Biot–Savart law above. Small surface coils placed directly over a body part (e.g. a knee or wrist coil) exploit the $1/R$ scaling of loop field strength: a smaller coil held close to the tissue of interest gives a stronger, more localized signal than the large body coil built into the scanner bore.
+
+</Callout>
+
+{/* FLAG (scope): refers to gradient coils and Sections 18-21 (spatial encoding), which are outside the defined scope. Text kept unchanged. */}
+
+## 3. The Lorentz Force
+
+<Callout type="note" title="Result: Lorentz Force">
+
+A charge $q$ moving with velocity $\vec{v}$ through a magnetic field $\vec{B}$ experiences a force:
+
+$$
+\vec{F} = q\vec{v}\times\vec{B}, \qquad \lvert F\rvert = qvB\sin\theta
+$$
+
+The force is always perpendicular to both $\vec{v}$ and $\vec{B}$ — it changes the direction of motion but never the speed, since it does no work ($\vec{F}\perp\vec{v}$ always).
+
+</Callout>
+
+<Figure caption="Charge q with velocity v and force F in a magnetic field pointing into the page (drawn as crosses) (figure from the source notes)." />
+
+<Callout type="note" title="Derivation: Why a Charge Moves in a Circle">
+
+Because $\vec{F}$ is always perpendicular to $\vec{v}$, it acts exactly like a centripetal force, continuously bending the path into a circle without changing speed. Setting the magnetic force equal to the required centripetal force:
+
+$$
+qvB = \frac{mv^2}{r} \quad\Longrightarrow\quad r = \frac{mv}{qB}
+$$
+
+The angular frequency of this circular motion (the cyclotron frequency) is:
+
+$$
+\omega_c = \frac{v}{r} = \frac{qB}{m} \quad\Longrightarrow\quad f_c = \frac{qB}{2\pi m}
+$$
+
+</Callout>
+
+{/* FLAG (physics check): the derivation assumes v perpendicular to B. For a general angle the path is a helix (circle in the plane perpendicular to B plus drift along B). */}
+
+<Callout type="example" title="Example: Circular Motion of a Charged Particle">
+
+A particle of charge $+e$ and mass equal to a proton's moves at $v = 2.0\times10^{6}\ \mathrm{m/s}$ perpendicular to $B = 0.50\ \mathrm{T}$.
+
+$$
+r = \frac{mv}{qB} = \frac{(1.67\times10^{-27})(2.0\times10^{6})}{(1.6\times10^{-19})(0.50)} \approx 4.2\times10^{-2}\ \mathrm{m} \approx 4.2\ \mathrm{cm}
+$$
+
+$$
+f_c = \frac{qB}{2\pi m} \approx 7.6\times10^{6}\ \mathrm{Hz} = 7.6\ \mathrm{MHz}
+$$
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Mass Spectrometry">
+
+This exact principle — a charged particle curving in a magnetic field with radius $r = mv/qB$ — is how a mass spectrometer identifies biomolecules. Ionized fragments of a protein or metabolite are accelerated into a magnetic field; particles with different mass-to-charge ratios ($m/q$) curve with different radii and strike a detector at different positions. This is one of the primary tools of modern proteomics and metabolomics.
+
+</Callout>
+
+<Callout type="warning" title="Caution: Cyclotron Motion Is Not Nuclear Precession">
+
+It is tempting to assume the nuclear spin precession we meet in Section 6 onward is the same thing as the cyclotron motion above, since both give a frequency proportional to $B$. They are not. Cyclotron motion is a free charge physically travelling in a circle under a force. Nuclear precession (Section 8) is a torque acting on a fixed intrinsic angular momentum vector, which does not translate anywhere — the nucleus stays put while its spin axis sweeps around a cone. Keep these two phenomena mentally separate.
+
+</Callout>
+
+{/* FLAG (cross-reference): nuclear precession is Section 9; Section 8 is the Zeeman splitting. */}
+
+## 4. Magnetic Dipoles: Torque and Potential Energy
+
+<Callout type="definition" title="Definition: Magnetic Dipole Moment">
+
+A current loop of area $A$ carrying current $I$ behaves, from a distance, like a tiny bar magnet. It is characterized by a magnetic dipole moment:
+
+$$
+\vec{\mu} = I\vec{A}, \qquad \lvert\mu\rvert = IA \quad (\text{for } N \text{ turns, } \mu = NIA)
+$$
+
+where $\vec{A}$ points perpendicular to the loop, by the right-hand rule.
+
+</Callout>
+
+<Callout type="note" title="Result: Torque and Potential Energy on a Dipole">
+
+In an external field $\vec{B}$, a magnetic dipole experiences a torque that tries to align $\vec{\mu}$ with $\vec{B}$:
+
+$$
+\vec{\tau} = \vec{\mu}\times\vec{B}, \qquad \lvert\tau\rvert = \mu B\sin\theta
+$$
+
+and has potential energy that depends on its orientation:
+
+$$
+U = -\vec{\mu}\cdot\vec{B} = -\mu B\cos\theta
+$$
+
+$U$ is lowest (most stable) when $\vec{\mu}$ is parallel to $\vec{B}$ ($\theta = 0$), and highest when antiparallel ($\theta = 180^\circ$).
+
+</Callout>
+
+<Figure caption="Current loop (magnetic dipole μ) in a field B at angle θ, with the torque τ pointing out of the page (figure from the source notes)." />
+
+<Callout type="example" title="Example: Torque on a Coil">
+
+A coil of $N = 100$ turns, radius 2 cm, carries $I = 0.5\ \mathrm{A}$, oriented at $90^\circ$ to a field $B = 0.1\ \mathrm{T}$.
+
+$$
+\mu = NIA = (100)(0.5)\pi(0.02)^2 \approx 6.3\times10^{-2}\ \mathrm{A\,m^2}
+$$
+
+$$
+\tau = \mu B\sin 90^\circ \approx 6.3\times10^{-3}\ \mathrm{N\,m}
+$$
+
+</Callout>
+
+<Callout type="note" title="Note: The Bridge to Nuclear Magnetism">
+
+Every idea in this box carries forward unchanged to the nuclear case: a nucleus with spin has a magnetic moment $\vec{\mu}$ (Section 5), an external field $B_0$ exerts a torque on it (driving precession, Section 8), and its energy depends on orientation relative to $B_0$ ($U = -\vec{\mu}\cdot\vec{B}_0$, giving the two Zeeman energy levels in Section 8). The physics is identical; only the source of $\vec{\mu}$ changes, from a macroscopic current loop to an intrinsic quantum property of the nucleus.
+
+</Callout>
+
+{/* FLAG (cross-reference): the nuclear magnetic moment is Section 6 (not 5), and precession is Section 9 (not 8). */}
+
+## 5. Ampère's Law and Symmetry
+
+<Callout type="note" title="Result: Ampère's Law">
+
+$$
+\oint \vec{B}\cdot d\vec{\ell} = \mu_0 I_{\text{enc}}
+$$
+
+The line integral of $\vec{B}$ around any closed loop equals $\mu_0$ times the current enclosed by that loop.
+
+</Callout>
+
+<Callout type="note" title="Note: When Is Ampère's Law Actually Useful?">
+
+Ampère's law is always true, but it is only easy to solve for $\vec{B}$ when the current distribution has enough symmetry that $\vec{B}$ is known to have constant magnitude along a path you can choose (so it can be pulled out of the integral). This works beautifully for an infinite straight wire (circular symmetry), a solenoid (translational symmetry along its axis), and a toroid. For an arbitrary loop or coil shape — like a real MRI gradient coil — there usually is not enough symmetry, and one must return to the full Biot–Savart integral (or numerical methods).
+
+</Callout>
+
+{/* FLAG (physics check): "always true" holds for steady currents (magnetostatics). With time-varying fields the Maxwell displacement-current term is needed. Also mentions MRI gradient coils (outside the defined scope). */}
+
+### 5.1 The Solenoid
+
+<Callout type="note" title="Result: Field Inside a Long Solenoid">
+
+For a tightly-wound solenoid with $n$ turns per unit length carrying current $I$:
+
+$$
+B = \mu_0 n I \ \text{(inside, uniform)}, \qquad B \approx 0 \ \text{(outside)}
+$$
+
+</Callout>
+
+<Figure caption="Solenoid with a uniform interior field B and an Amperian loop (figure from the source notes)." />
+
+<Callout type="example" title="Example: Why MRI Magnets Are Superconducting">
+
+What current would a simple solenoid with $n = 5000$ turns/m need to reach a clinical field of $B = 1.5\ \mathrm{T}$?
+
+$$
+I = \frac{B}{\mu_0 n} = \frac{1.5}{(4\pi\times10^{-7})(5000)} \approx 239\ \mathrm{A}
+$$
+
+Sustaining $\sim$240 A continuously in an ordinary copper coil would generate enormous resistive heating ($P = I^2R$). This is precisely why real MRI magnets use superconducting wire, cooled with liquid helium to near absolute zero, where resistance vanishes and the current can circulate indefinitely with no power input and no heat generated.
+
+</Callout>
+
+## Exercises
+
+**P1.** A long straight wire carries $I = 5\ \mathrm{A}$. Find $B$ at $r = 2\ \mathrm{cm}$.
+
+**P2.** A circular coil of $N = 50$ turns and radius 3 cm carries $I = 0.2\ \mathrm{A}$. Find the field at its centre.
+
+**P3.** A proton moves at $v = 1.5\times10^{6}\ \mathrm{m/s}$ perpendicular to $B = 1.0\ \mathrm{T}$. Find the radius and frequency of its circular path.
+
+**P4.** A coil with magnetic moment $\mu = 0.02\ \mathrm{A\,m^2}$ is oriented at $30^\circ$ to a field $B = 0.3\ \mathrm{T}$. Find the torque and the potential energy.
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Biot–Savart (wire) | $B = \mu_0 I/2\pi r$ |
+| Biot–Savart (loop centre) | $B = \mu_0 I/2R$ |
+| Lorentz force | $\vec{F} = q\vec{v}\times\vec{B}$, $\; r = mv/qB$ |
+| Dipole torque / energy | $\vec{\tau} = \vec{\mu}\times\vec{B}$, $\; U = -\vec{\mu}\cdot\vec{B}$ |
+| Solenoid | $B = \mu_0 n I$ |

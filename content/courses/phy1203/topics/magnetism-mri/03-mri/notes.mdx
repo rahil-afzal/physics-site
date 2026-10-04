@@ -1,0 +1,138 @@
+---
+type: lecture
+lecture: 3
+title: MRI
+status: developing
+---
+
+{/* Converted from Magnetism.pdf (Lecture Notes: Basic Principles of NMR and MRI), part 3 of 3: source sections 10-12. Source text and section numbers kept unchanged so the notes' internal cross-references still hold. Scope: the defined scope of the PHY 1203 NMR/MRI material ends at MRI signal detection (source section 12); source sections 13-25 and problems P8-P13 are intentionally not converted. Exercises renumbered: P1 = source P7, P2 = source P14. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## 10. RF Excitation: B1, Resonance, and the Flip Angle
+
+<Callout type="note" title="Note: Why a Second Field Is Needed">
+
+Spins sitting quietly in $B_0$, all precessing at the same frequency about the $z$-axis, produce no useful changing signal for a receiver coil to pick up (Section 12). We need to tip the magnetization away from $z$ and into the transverse plane. This requires a second, much weaker magnetic field, applied perpendicular to $B_0$ and oscillating at the Larmor frequency.
+
+</Callout>
+
+<Callout type="definition" title="Definition: B0 versus B1">
+
+- $B_0$: the strong (1–7 T), static, always-on main field. It sets the Larmor frequency and creates the equilibrium magnetization $M_0\hat{z}$.
+- $B_1$: a weak ($\sim\mu$T), oscillating field produced by the RF coil, applied only in short pulses, in the plane perpendicular to $B_0$. It is what actually manipulates the magnetization during a scan.
+
+Confusing the two is one of the most common student errors in MRI physics: $B_0$ sets up the stage; $B_1$ is the only thing that acts on it.
+
+</Callout>
+
+{/* FLAG (consistency): "B1 is the only thing that acts on it" - B0 also acts on the moments (it exerts the torque that causes precession, section 9). Probably means B1 is the only field that changes the tip angle. */}
+
+<Callout type="note" title="Result: Resonance Condition">
+
+$B_1$ only efficiently tips the magnetization when its oscillation frequency matches the Larmor frequency:
+
+$$
+\omega_{\text{RF}} \approx \omega_0 = \gamma B_0
+$$
+
+This is the **resonance condition** that gives NMR its name: energy transfers efficiently from the RF field to the spin system only at this one frequency, just as a swing only responds strongly to pushes timed at its own natural frequency.
+
+</Callout>
+
+<Callout type="note" title="Result: Flip Angle">
+
+For an RF pulse of amplitude $B_1$ applied for duration $\tau$, the magnetization rotates away from $z$ by the **flip angle**:
+
+$$
+\alpha = \gamma B_1 \tau
+$$
+
+A $90^\circ$ pulse rotates $\vec{M}$ from the $z$-axis fully into the transverse plane; a $180^\circ$ pulse inverts $\vec{M}$ to point along $-z$.
+
+</Callout>
+
+{/* FLAG (definition check): alpha = gamma B1 tau holds when B1 is the amplitude of the rotating (circularly polarised) component. A linearly oscillating field of amplitude B1 has a rotating component of B1/2, giving half this angle. */}
+
+<Figure caption="Net magnetization M tipped away from the z-axis (B0) by the flip angle α, with the B1 field shown in the transverse plane (figure from the source notes)." />
+
+<Callout type="example" title="Example: Timing a 90° Pulse">
+
+With $B_1 = 10\ \mu\mathrm{T}$, how long must the pulse last to achieve a $90^\circ$ flip?
+
+$$
+\tau = \frac{\alpha}{\gamma B_1} = \frac{\pi/2}{(2.675\times10^{8})(10\times10^{-6})} \approx 5.9\times10^{-4}\ \mathrm{s} \approx 0.59\ \mathrm{ms}
+$$
+
+</Callout>
+
+<Callout type="note" title="Note: The Rotating Frame">
+
+In the lab frame, $B_1$ oscillates rapidly and the picture above looks far messier (a corkscrew trajectory, not a clean tip). Switching to a reference frame that rotates with the spins at $\omega_0$ makes $B_1$ appear to stand still, pointing along one fixed transverse axis. In this rotating frame, the magnetization simply rotates smoothly away from $z$ by the flip angle $\alpha$ — the clean picture shown above. This is purely a change of viewpoint, not a change in the physics.
+
+</Callout>
+
+## 11. Longitudinal and Transverse Magnetization
+
+<Callout type="definition" title="Definition: Mz and Mxy">
+
+The net magnetization vector can always be split into two components:
+
+$$
+\vec{M} = M_z\hat{z} + \vec{M}_{xy}
+$$
+
+**Longitudinal magnetization** $M_z$: the component along $B_0$. At equilibrium, $M_z = M_0$ and $M_{xy} = 0$. **Transverse magnetization** $M_{xy}$: the component in the plane perpendicular to $B_0$. It is zero at equilibrium and is created only by an RF pulse.
+
+</Callout>
+
+<Figure caption="Net magnetization M split into its longitudinal component Mz (along z) and transverse component Mxy (in the xy-plane) (figure from the source notes)." />
+
+<Callout type="note" title="Note: Why This Split Matters">
+
+$M_{xy}$ is the only part of the magnetization a receiver coil can detect (Section 12) — it is precessing, so it produces a changing magnetic flux. $M_z$, sitting static along $B_0$, produces no changing flux and is invisible to the coil. Everything in Sections 13–16 (relaxation, FID, spin echo) is really the story of $M_{xy}$ shrinking back toward zero while $M_z$ regrows toward $M_0$ — two independent, simultaneous processes with, as we will see, two different characteristic timescales.
+
+</Callout>
+
+{/* FLAG (scope): the last sentence looks ahead to Sections 13-16 (relaxation, FID, spin echo), outside the defined scope. Text kept unchanged. */}
+
+## 12. Signal Detection and Faraday's Law
+
+<Callout type="note" title="Note: From a 90° Pulse to a Signal">
+
+Immediately after an ideal $90^\circ$ pulse, $\vec{M}$ lies entirely in the transverse plane. Because all the individual nuclear moments were tipped together, they still precess approximately in phase with one another, so their transverse components add up coherently into one large rotating $M_{xy}$. This rotating magnetization is a changing magnetic field near the receiver coil.
+
+</Callout>
+
+<Callout type="note" title="Result: Faraday's Law of Induction">
+
+$$
+\mathcal{E} = -\frac{d\Phi_B}{dt}
+$$
+
+A changing magnetic flux $\Phi_B$ through a coil induces an EMF (voltage) $\mathcal{E}$ in that coil. Since the precessing $M_{xy}$ continuously changes the magnetic flux through the receiver coil, $d\Phi_B/dt \neq 0$, and a real, measurable, oscillating voltage is induced — this voltage is the raw MRI signal.
+
+precessing $M_{xy}$ → changing magnetic flux → induced voltage (Faraday's law) → MRI signal
+
+</Callout>
+
+<Callout type="note" title="Note: Signal Detection versus Spatial Encoding">
+
+It is worth being explicit about a distinction many students blur together. **Signal detection** (this section) is simply: does the coil pick up a voltage at all? It tells you that some transverse magnetization exists and how it decays over time, but by itself it carries no information about *where* in the body that signal came from. **Spatial encoding** (Sections 18–21) is the separate problem of making the detected signal depend on position, using magnetic field gradients. MRI needs both: detection to get a signal, encoding to know where it came from.
+
+</Callout>
+
+{/* FLAG (scope): refers to Sections 18-21 (spatial encoding with gradients) and to how the signal decays, both outside the defined scope. Text kept unchanged. */}
+
+## Exercises
+
+**P1.** A $90^\circ$ pulse uses $B_1 = 15\ \mu\mathrm{T}$. Find the required pulse duration.
+
+**P2.** A patient is scanned at 7 T instead of 1.5 T. Explain two distinct physical reasons the signal is expected to change.
+
+{/* FLAG (scope check): the source does not state which two reasons are intended. Within sections 1-12 two are available: the larger Boltzmann population excess (section 8) and the higher precession frequency, which gives a larger induced EMF (section 12). Confirm this matches your intent, since the full source also covers relaxation and susceptibility topics outside the scope. */}
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Flip angle | $\alpha = \gamma B_1\tau$ |
+| Faraday's law | $\mathcal{E} = -d\Phi_B/dt$ |

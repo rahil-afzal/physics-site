@@ -1,0 +1,195 @@
+---
+type: lecture
+lecture: 2
+title: NMR
+status: developing
+---
+
+{/* Converted from Magnetism.pdf (Lecture Notes: Basic Principles of NMR and MRI), part 2 of 3: source sections 6-9. Source text and section numbers kept unchanged so the notes' internal cross-references still hold. Scope: the defined scope of the PHY 1203 NMR/MRI material ends at MRI signal detection (source section 12); source sections 13-25 and problems P8-P13 are intentionally not converted. Exercises renumbered: P1 = source P5, P2 = source P6. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## 6. Nuclear Spin and Magnetic Moments
+
+We now leave classical electromagnetism and enter the quantum world of the nucleus itself — but we will see that nearly every classical idea from Sections 1–5 reappears, just attached to a new, intrinsically quantum source.
+
+<Callout type="definition" title="Definition: Nuclear Spin">
+
+Spin is an intrinsic quantum-mechanical form of angular momentum carried by subatomic particles. It is not literal spinning motion of a tiny sphere — it is a fundamental quantum property, as basic as mass or charge, that simply happens to behave mathematically like angular momentum. For a nucleus with spin quantum number $I$, the magnitude of its intrinsic angular momentum is:
+
+$$
+\lvert\vec{I}\rvert = \sqrt{I(I+1)}\,\hbar
+$$
+
+A proton (hydrogen-1 nucleus) has $I = \tfrac{1}{2}$, giving $\lvert\vec{I}\rvert = \tfrac{\sqrt{3}}{2}\hbar$.
+
+</Callout>
+
+<Callout type="warning" title="Caution: Spin versus Classical Rotation">
+
+Do not picture the proton as a small ball physically spinning on an axis. Spin is a label for a quantum degree of freedom with no classical counterpart — there is no internal structure actually rotating. The name survives for historical reasons, and the classical picture of a spinning/precessing vector remains an extremely useful mathematical analogy for predicting how the nuclear magnetic moment behaves in a field — which is why we will keep drawing it as an arrow sweeping around a cone. Just remember: it is a model of the mathematics, not a literal picture of the proton.
+
+</Callout>
+
+<Callout type="note" title="Result: Nuclear Magnetic Moment">
+
+A nucleus with nonzero spin has an associated magnetic dipole moment, exactly analogous to the current-loop dipole of Section 4:
+
+$$
+\vec{\mu} = \gamma\vec{I}
+$$
+
+where $\gamma$ is the gyromagnetic ratio, a constant specific to each type of nucleus. For hydrogen-1:
+
+$$
+\frac{\gamma}{2\pi} \approx 42.58\ \mathrm{MHz/T}
+$$
+
+</Callout>
+
+## 7. Why Hydrogen-1 Is Central to MRI
+
+<Callout type="note" title="Note: The Case for Hydrogen">
+
+A nucleus is useful for MRI only if it has nonzero spin. Hydrogen-1 ($I = \tfrac{1}{2}$, a single proton) is the overwhelming choice because:
+
+- The human body is $\sim$60–70% water by mass, and water and fat together make hydrogen the most abundant MRI-visible nucleus by far.
+- It has a relatively large gyromagnetic ratio, giving a strong, practically usable signal.
+- Its simple spin-$\tfrac{1}{2}$ structure (only two energy levels, Section 8) makes the physics and the resulting signal easy to interpret.
+
+</Callout>
+
+## 8. The Static Field B0: Zeeman Splitting and Net Magnetization
+
+<Callout type="note" title="Note: No Field, No Preference">
+
+With no external field, the magnetic moments of a large population of hydrogen nuclei point in random directions. Their vector sum is approximately zero: $\vec{M} \approx 0$. There is nothing yet for an MRI scanner to detect.
+
+</Callout>
+
+Placing the sample in a strong, uniform static field $\vec{B}_0 = B_0\hat{z}$ changes this completely — not by physically rotating every nucleus into alignment, but by splitting their allowed energy states.
+
+<Callout type="note" title="Derivation: Zeeman Splitting and the Larmor Frequency">
+
+A magnetic dipole in a field has orientation-dependent energy (Section 4): $U = -\vec{\mu}\cdot\vec{B}_0$. For a spin-$\tfrac{1}{2}$ nucleus, quantum mechanics permits only two orientations, $m_I = +\tfrac{1}{2}$ and $m_I = -\tfrac{1}{2}$, giving two discrete energy levels:
+
+$$
+E = -\gamma m_I \hbar B_0
+$$
+
+The energy gap between them is:
+
+$$
+\Delta E = \hbar\gamma B_0
+$$
+
+A transition between these two levels can be driven by a photon of exactly the right energy, $E = hf$. Setting $hf_0 = \hbar\gamma B_0$ and using $\hbar = h/2\pi$:
+
+$$
+\omega_0 = \gamma B_0 \quad\Longrightarrow\quad f_0 = \frac{\gamma}{2\pi}B_0
+$$
+
+This is the **Larmor frequency** — the central equation of NMR and MRI, derived here purely from the two-level Zeeman splitting and Planck's relation $E = hf$.
+
+</Callout>
+
+<Figure caption="Zeeman levels: degenerate at B0 = 0; for B0 > 0 they split into m_I = -1/2 and m_I = +1/2 with energy gap ΔE = ħγB0 (figure from the source notes)." />
+
+<Callout type="example" title="Example: How Small Is the Population Imbalance?">
+
+At thermal equilibrium, the Boltzmann distribution sets the ratio of populations in the upper and lower levels:
+
+$$
+\frac{N_{\text{upper}}}{N_{\text{lower}}} = e^{-\Delta E/k_B T} = e^{-\hbar\gamma B_0/k_B T}
+$$
+
+At body temperature ($T = 310\ \mathrm{K}$) and $B_0 = 1.5\ \mathrm{T}$:
+
+$$
+\Delta E = \hbar\gamma B_0 \approx 4.2\times10^{-26}\ \mathrm{J}, \qquad k_B T \approx 4.3\times10^{-21}\ \mathrm{J}
+$$
+
+$$
+\frac{\Delta E}{k_B T} \approx 9.9\times10^{-6}
+$$
+
+The fractional excess of nuclei in the lower (aligned) state is only about $\Delta E/2k_BT \approx 5\times10^{-6}$ — roughly 5 nuclei in every million. Yet because a single cubic millimetre of tissue contains $\sim 7\times10^{19}$ hydrogen nuclei, this tiny fractional excess still leaves hundreds of trillions of extra aligned spins per $\mathrm{mm^3}$ — enough for a perfectly detectable signal. Doubling $B_0$ to 3 T roughly doubles this excess, which is the basic physical reason higher-field scanners give a stronger signal.
+
+</Callout>
+
+<Callout type="note" title="Result: Net Magnetization">
+
+Rather than track billions of individual nuclei, we define the macroscopic **net magnetization vector** as the sum of all nuclear magnetic moments:
+
+$$
+\vec{M} = \sum_i \vec{\mu}_i
+$$
+
+At thermal equilibrium in $B_0$, the small population excess in the lower-energy state produces a net magnetization aligned with the field:
+
+$$
+\vec{M} = M_0\hat{z}
+$$
+
+This equilibrium magnetization, parallel to $B_0$, is called the **longitudinal magnetization** and is the starting point for every MRI measurement.
+
+</Callout>
+
+{/* FLAG (units): magnetization is conventionally the sum of moments per unit volume (A/m). Here it is written as the plain sum, which has units of A m^2. */}
+
+## 9. Larmor Precession
+
+<Callout type="definition" title="Definition: Precession">
+
+A magnetic moment placed in a field does not simply snap into alignment. Because the torque $\vec{\tau} = \vec{\mu}\times\vec{B}_0$ is always perpendicular to $\vec{\mu}$, it cannot change the magnitude of $\vec{\mu}$ or its angle to $B_0$ — it can only rotate $\vec{\mu}$ around the field direction. The classical equation of motion is:
+
+$$
+\frac{d\vec{\mu}}{dt} = \gamma\,\vec{\mu}\times\vec{B}_0
+$$
+
+which describes $\vec{\mu}$ sweeping around the axis of $\vec{B}_0$ at constant angle — tracing out a cone. This is **Larmor precession**, with angular frequency $\omega_0 = \gamma B_0$, the same result obtained from the energy-level picture in Section 8.
+
+</Callout>
+
+<Figure caption="Magnetic moment μ precessing about B0 (the z-axis) at angular frequency ω0, tracing out a cone (figure from the source notes)." />
+
+<Callout type="note" title="Analogy: The Spinning Top">
+
+This is mathematically identical to a classical spinning top that is tilted away from vertical in gravity: gravity exerts a torque, but instead of simply falling over, the top's spin axis sweeps slowly around the vertical, tracing a cone. Gravity plays the role of $B_0$; the top's own spin angular momentum plays the role of the nuclear spin.
+
+</Callout>
+
+{/* FLAG (physics check): "mathematically identical" is too strong. Both obey torque = dL/dt, but a top's precession rate depends on its spin angular momentum (slower for faster spin), whereas the Larmor frequency gamma B0 does not depend on the moment's size because mu is proportional to L. */}
+
+<Callout type="example" title="Example: Larmor Frequencies at Clinical Field Strengths">
+
+Using $f_0 = (\gamma/2\pi)B_0 \approx 42.58\,B_0$ MHz (with $B_0$ in tesla):
+
+| $B_0$ | Larmor frequency $f_0$ |
+|---|---|
+| 1.0 T | 42.58 MHz |
+| 1.5 T | 63.87 MHz |
+| 3.0 T | 127.74 MHz |
+| 7.0 T | 298.06 MHz |
+
+At 1.5 T, each proton completes one full precession cycle in $1/f_0 \approx 15.7\ \mathrm{ns}$. These frequencies fall in the radiofrequency (RF) band — which is exactly why the excitation pulse in Sections 10–11 is called an RF pulse.
+
+</Callout>
+
+<Callout type="note" title="Note: Why Not Just Use Earth's Magnetic Field?">
+
+Earth's field is about $B_0 \approx 50\ \mu\mathrm{T}$, giving a Larmor frequency of only $f_0 \approx 2.1\ \mathrm{kHz}$ — both far too weak a field to produce a usable Boltzmann population difference (Section 8), and far too low a frequency to couple efficiently to a practical RF coil. Clinical scanners use 1.5–3 T: roughly 30,000–60,000 times stronger than Earth's field.
+
+</Callout>
+
+## Exercises
+
+**P1.** Find the Larmor frequency of hydrogen at $B_0 = 2.0\ \mathrm{T}$.
+
+**P2.** At $T = 310\ \mathrm{K}$ and $B_0 = 3.0\ \mathrm{T}$, estimate the fractional population excess in the lower Zeeman level for hydrogen.
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Nuclear magnetic moment | $\vec{\mu} = \gamma\vec{I}$ |
+| Zeeman splitting | $\Delta E = \hbar\gamma B_0$ |
+| Larmor frequency | $\omega_0 = \gamma B_0$, $\; f_0 = (\gamma/2\pi)B_0$ |
