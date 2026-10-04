@@ -1,0 +1,247 @@
+---
+type: lecture
+lecture: 2
+title: Current Electricity
+status: developing
+---
+
+{/* Converted from Charges_Current.pdf (Lecture Notes: Electricity), part 2 of 3: source sections 4-6. Source text kept unchanged. Sections renumbered 4-6 to 1-3. Exercises renumbered: A1 = source A4, A2 = source A5, A3 = source A10, B1 = source B4, B2 = source B5. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## 1. Current, Resistance, and Ohm's Law
+
+### 1.1 Electric Current
+
+<Callout type="definition" title="Definition: Electric Current">
+
+Current is the rate of charge flow:
+
+$$
+I = \frac{\Delta Q}{\Delta t}, \qquad [I] = \text{Ampere (A)} = \mathrm{C/s}
+$$
+
+Conventional current flows in the direction positive charges move (from high to low potential). In biological systems, current is carried by ions (not electrons), moving through aqueous solution and ion channels.
+
+</Callout>
+
+<Callout type="note" title="Note: Biological Current Magnitudes">
+
+Biological currents are tiny by household standards but enormous at the single-channel level:
+
+| Biological event | Current |
+|---|---|
+| Single ion channel (open) | ∼ 1–10 pA |
+| Axon action potential | ∼ 1–100 nA |
+| Cardiac pacemaker cell | ∼ 1 µA |
+| Whole-heart ECG surface current | ∼ 1 mA |
+
+</Callout>
+
+### 1.2 Resistance and Ohm's Law
+
+<Callout type="note" title="Result: Resistance and Ohm's Law">
+
+The resistance of a conductor of length $L$, cross-section $A$, and resistivity $\rho$ (material property):
+
+$$
+R = \rho\frac{L}{A}, \qquad [R] = \Omega\ \text{(ohm)}
+$$
+
+Ohm's Law (for ohmic, i.e., linear, conductors):
+
+$$
+V = IR
+$$
+
+</Callout>
+
+<Callout type="note" title="Analogy: Water Pipe Analogy — The Complete Picture">
+
+The water pipe analogy is the most powerful tool for intuition:
+
+| Electrical | Hydraulic |
+|---|---|
+| Voltage $V$ (V) | Pressure difference (Pa) |
+| Current $I$ (A) | Flow rate ($\mathrm{m^3/s}$) |
+| Resistance $R$ ($\Omega$) | Fluidic resistance |
+| Capacitance $C$ (F) | Elastic reservoir |
+| Charge $Q$ (C) | Volume of water |
+| Conductor wire | Wide pipe (low resistance) |
+| Thin wire / resistor | Narrow pipe (high resistance) |
+| Open switch | Closed valve |
+| Battery | Pump |
+
+Ohm's law $V = IR$ is perfectly analogous to Poiseuille's law $\Delta P = Q\cdot R_{\text{fluid}}$ from the fluid mechanics lecture.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Ion Channels as Resistors">
+
+Each type of ion channel has a characteristic conductance $g = 1/R$ (siemens, S). A typical single channel has $g \approx 10$–$100\ \mathrm{pS}$.
+
+- Closed channel $\equiv$ infinite resistance / zero conductance.
+- Open channel $\equiv$ finite resistance, allowing ion flow.
+- The more channels open, the lower the total membrane resistance, and the larger the current for a given driving voltage.
+- Drugs that block channels (e.g. tetrodotoxin blocks $\mathrm{Na^+}$ channels) increase membrane resistance and prevent action potentials — used as a model toxin in neuroscience research.
+
+</Callout>
+
+## 2. Kirchhoff's Laws and Circuit Analysis
+
+<Callout type="note" title="Result: Kirchhoff's Laws">
+
+**Kirchhoff's Current Law (KCL)** — conservation of charge:
+
+$$
+\sum I_{\text{in}} = \sum I_{\text{out}} \quad \text{at any junction}
+$$
+
+**Kirchhoff's Voltage Law (KVL)** — conservation of energy:
+
+$$
+\sum_{\text{loop}} V = 0 \quad \text{around any closed loop}
+$$
+
+</Callout>
+
+<Callout type="note" title="Analogy: KCL as a River Junction">
+
+At a river confluence (junction), the total water flowing in equals the total flowing out — water doesn't pile up at the junction. This is KCL: charge doesn't accumulate at a node (under steady state). At a river fork (branching axon), the flow splits between branches according to their widths (conductances).
+
+</Callout>
+
+<Callout type="note" title="Result: Series and Parallel Resistance">
+
+**Series:** $R_{\text{eq}} = R_1 + R_2 + \cdots$ (same current through each; voltages add)
+
+**Parallel:** $\dfrac{1}{R_{\text{eq}}} = \dfrac{1}{R_1} + \dfrac{1}{R_2} + \cdots$ (same voltage across each; currents add)
+
+</Callout>
+
+<Callout type="example" title="Example: Worked Circuit — Kirchhoff's Laws">
+
+A 12 V battery drives current through $R_1 = 100\ \Omega$ in series with $R_2 = 150\ \Omega$ and $R_3 = 300\ \Omega$ in parallel.
+
+**Step 1 — Parallel combination:**
+
+$$
+\frac{1}{R_{23}} = \frac{1}{150} + \frac{1}{300} = \frac{2}{300} + \frac{1}{300} = \frac{3}{300} \quad\Rightarrow\quad R_{23} = 100\ \Omega
+$$
+
+**Step 2 — Total resistance:**
+
+$$
+R_{\text{eq}} = R_1 + R_{23} = 100 + 100 = 200\ \Omega
+$$
+
+**Step 3 — Total current (KVL on outer loop):**
+
+$$
+I_1 = \frac{V}{R_{\text{eq}}} = \frac{12}{200} = 0.06\ \mathrm{A} = 60\ \mathrm{mA}
+$$
+
+**Step 4 — Branch currents (KCL at node):**
+
+Voltage across the parallel pair: $V_{23} = I_1\times R_{23} = 0.06\times100 = 6\ \mathrm{V}$
+
+$$
+I_2 = \frac{V_{23}}{R_2} = \frac{6}{150} = 0.04\ \mathrm{A}, \qquad I_3 = \frac{V_{23}}{R_3} = \frac{6}{300} = 0.02\ \mathrm{A}
+$$
+
+Check KCL: $I_2 + I_3 = 0.04 + 0.02 = 0.06 = I_1$ ✓
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: KCL at an Axon Branch Point">
+
+When a nerve axon branches into two daughter fibres at a node, the ionic current carried by the action potential must split between the two branches according to their conductances (inverse resistances). A thicker axon (lower $R$) carries more current. If one branch has much higher resistance (e.g. a thin branch to a small muscle fibre), it receives less current. Kirchhoff's current law determines exactly how much current each branch receives, and therefore whether the action potential can propagate into that branch at all.
+
+</Callout>
+
+## 3. RC Circuits and Bioelectric Membranes
+
+<Callout type="definition" title="Definition: RC Circuit">
+
+A resistor $R$ in series with a capacitor $C$ connected to a voltage source $V_0$. The voltage across the capacitor changes exponentially, governed by the time constant $\tau = RC$.
+
+</Callout>
+
+<Callout type="note" title="Result: RC Charging and Discharging">
+
+**Charging:**
+
+$$
+V_C(t) = V_0\left(1 - e^{-t/RC}\right)
+$$
+
+**Discharging:**
+
+$$
+V_C(t) = V_0\,e^{-t/RC}
+$$
+
+At $t = \tau$: $V_C \approx 63\%$ of final value (charging) or $37\%$ remaining (discharging). After $5\tau$, the capacitor is considered fully charged/discharged ($>99\%$).
+
+</Callout>
+
+<Callout type="note" title="Analogy: RC Charging as Filling a Leaky Bucket">
+
+Imagine filling a bucket (capacitor) with water from a tap through a narrow nozzle (resistor). At first, water rushes in quickly (large current) because the bucket is empty. As the bucket fills, back-pressure builds and the flow slows. Eventually the flow almost stops — i.e. the bucket is charged. Pull out the plug (discharge) and the bucket empties fast at first, then slower. The narrower the nozzle ($R$), or the larger the bucket ($C$), the slower the process — the larger $\tau = RC$.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Neuron Membrane — A Biological RC Circuit">
+
+The neuron membrane combines resistance (ion channels, $R_m$) and capacitance (lipid bilayer, $C_m$) in a parallel RC arrangement. The membrane time constant:
+
+$$
+\tau_m = R_m C_m
+$$
+
+determines how quickly the membrane potential responds to a stimulus.
+
+For a typical neuron: $R_m = 40\ \mathrm{M\Omega}$, $C_m = 200\ \mathrm{pF}$:
+
+$$
+\tau_m = 40\times10^{6}\times200\times10^{-12} = 8\times10^{-3}\ \mathrm{s} = 8\ \mathrm{ms}
+$$
+
+A stimulus briefer than $\sim\tau_m$ is blurred out by the membrane capacitance. Fast-signalling interneurons have small $\tau_m$ (by reducing $R_m$ through more open channels); integrating neurons have large $\tau_m$ (to average inputs over time).
+
+**Clinical relevance:** General anaesthetics partially block $\mathrm{Na^+}$ channels ($\uparrow R_m \Rightarrow \uparrow\tau_m$), slowing neuronal response and suppressing consciousness.
+
+</Callout>
+
+{/* FLAG (biology claim to verify): the anaesthetic mechanism given here (Na+ channel block raising R_m) looks oversimplified. Many general anaesthetics act mainly by enhancing GABA-A (chloride) conductance, which lowers R_m. */}
+
+## Exercises
+
+{/* FLAG (pedagogy): A1 repeats the worked circuit example in section 2 with the same numbers. */}
+
+### Part A: Mathematical Problems
+
+**A1. Circuit Analysis (KCL/KVL).** A 12 V battery, $R_1 = 100\ \Omega$ in series, $R_2 = 150\ \Omega$ and $R_3 = 300\ \Omega$ in parallel. Find total current, branch currents, and voltage drop across $R_1$.
+
+**A2. RC Time Constant.** A neuron has $R_m = 20\ \mathrm{M\Omega}$ and $C_m = 0.5\ \mu\mathrm{F}$. (a) Calculate $\tau$. (b) What fraction of the final voltage is reached after $t = 2\tau$? (c) After how long (in $\tau$) is 95% of the final voltage reached?
+
+{/* FLAG (probable typo): 20 MOhm times 0.5 uF gives tau = 10 s, far from neuronal time scales. The lecture example uses C_m = 200 pF. Perhaps 0.5 nF (tau = 10 ms) was intended. */}
+
+**A3. Parallel Resistance Network.** Three ion channel types have conductances $g_1 = 10\ \mathrm{nS}$, $g_2 = 5\ \mathrm{nS}$, $g_3 = 2\ \mathrm{nS}$. They are all open simultaneously. Find the total membrane conductance and total resistance $R_m$.
+
+### Part B: Conceptual Questions
+
+**B1.** Describe how Kirchhoff's current law applies to a branching axon. If one branch has twice the diameter of the other, how does this affect the fraction of current entering each branch?
+
+**B2.** A patient is given a drug that increases membrane resistance $R_m$ tenfold while leaving $C_m$ unchanged. How does the membrane time constant $\tau_m$ change? How does this affect the neuron's ability to follow rapidly changing inputs?
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Current | $I = \Delta Q/\Delta t$ |
+| Resistance | $R = \rho L/A$ |
+| Ohm's Law | $V = IR$ |
+| RC time constant | $\tau = RC$ |
+| Charging | $V_C = V_0\left(1 - e^{-t/RC}\right)$ |
+| Discharging | $V_C = V_0\,e^{-t/RC}$ |
+| KCL | $\sum I_{\text{in}} = \sum I_{\text{out}}$ |
+| KVL | $\sum_{\text{loop}} V = 0$ |

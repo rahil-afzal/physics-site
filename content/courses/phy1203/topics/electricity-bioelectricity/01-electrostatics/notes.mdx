@@ -1,0 +1,239 @@
+---
+type: lecture
+lecture: 1
+title: Electrostatics
+status: developing
+---
+
+{/* Converted from Charges_Current.pdf (Lecture Notes: Electricity), part 1 of 3: Introduction and source sections 1-3. Source text kept unchanged. Exercises renumbered: A1-A3 = source A1-A3, B1 = source B1. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## Introduction: Why Electricity Is the Language of Life
+
+Before the 19th century, electricity and life were thought to be entirely separate domains of nature. Luigi Galvani's famous 1780 experiment — where a dissected frog's leg twitched when touched with two different metals — shattered that boundary forever. We now know that every cell in your body is an electrical device.
+
+Consider: your heart beats because of an electrical signal that sweeps across cardiac muscle 60–100 times per minute. Your brain processes this sentence using electrical impulses travelling at up to 120 m/s along nerve fibres. Every muscle contraction, every sensory perception, every hormone release is ultimately triggered by an electrical event at a cell membrane. Even DNA replication depends on the electrostatic forces between charged molecules.
+
+This lecture covers the physical principles of electricity: charge, fields, potential, current, resistance, capacitance, and circuits — and connects each concept directly to the biological systems that exploit them.
+
+{/* FLAG (scope): the closing paragraph of the introduction says this lecture covers charge through circuits, i.e. the whole chapter. With the split it describes lectures 1-3 together. Left unchanged. */}
+
+## 1. Electric Charge and Coulomb's Law
+
+### 1.1 Electric Charge
+
+<Callout type="definition" title="Definition: Electric Charge">
+
+Electric charge is a fundamental property of matter. It comes in two types: positive (protons, $+e$) and negative (electrons, $-e$). Like charges repel; unlike charges attract. The elementary charge is $e = 1.602\times10^{-19}\ \mathrm{C}$ (coulombs).
+
+</Callout>
+
+Charge is conserved. It can be transferred between objects but never created or destroyed. This is why the total charge inside a living cell remains constant even as ions rush in and out through channels.
+
+{/* FLAG (physics check): "total charge inside a living cell remains constant" — ions crossing the membrane do change the cell's net charge (by a very small amount). Conservation holds for cell plus surroundings. */}
+
+| Ion | Charge | Inside cell (mM) | Outside cell (mM) |
+|---|---|---|---|
+| $\mathrm{Na^+}$ | $+e$ | 12 | 145 |
+| $\mathrm{K^+}$ | $+e$ | 140 | 5 |
+| $\mathrm{Cl^-}$ | $-e$ | 4 | 116 |
+| $\mathrm{Ca^{2+}}$ | $+2e$ | 0.0001 | 2 |
+
+These gradients of charge across the cell membrane are the source of all bioelectrical phenomena.
+
+### 1.2 Coulomb's Law
+
+<Callout type="note" title="Result: Coulomb's Law">
+
+The electrostatic force between two point charges $q_1$ and $q_2$ separated by distance $r$:
+
+$$
+F = k_e\,\frac{\lvert q_1 q_2\rvert}{r^2}, \qquad k_e = 8.99\times10^{9}\ \mathrm{N\,m^2/C^2}
+$$
+
+Attractive if the charges are opposite; repulsive if they are the same sign. Force falls as $1/r^2$ — the same inverse-square law as gravity.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Gravity vs. Electrostatics">
+
+Coulomb's law and Newton's gravity law are structurally identical: $F = G m_1 m_2/r^2$ vs. $F = k_e q_1 q_2/r^2$. The key difference: gravity is always attractive; electrostatic forces can be either attractive or repulsive. Also, $k_e \approx 10^{40}$ times larger than $G$, meaning the electric force between a proton and electron is $\sim 10^{39}$ times stronger than their gravitational attraction. Atoms are held together by electricity, not gravity.
+
+</Callout>
+
+{/* FLAG (physics check): k_e and G have different units, and k_e/G is about 1e20, not 1e40. The 1e39 figure is the proton-electron force ratio (it includes the particle masses and charges). */}
+
+<Callout type="example" title="Example: Force Between Ions">
+
+A $\mathrm{Na^+}$ ion ($q_1 = +e$) and $\mathrm{Cl^-}$ ion ($q_2 = -e$) are separated by $r = 0.28\ \mathrm{nm}$ (typical ionic bond length in NaCl crystal):
+
+$$
+F = k_e\frac{e^2}{r^2} = \frac{8.99\times10^{9}\times(1.6\times10^{-19})^2}{(2.8\times10^{-10})^2} \approx 2.94\times10^{-9}\ \mathrm{N}
+$$
+
+This $\approx 3\ \mathrm{nN}$ force is small in everyday terms, but it is enormous relative to the mass of an ion (producing accelerations $\sim 10^{18}\ \mathrm{m/s^2}$). It is this force that drives ions through open channels and holds protein structures together.
+
+</Callout>
+
+{/* FLAG (check): a = F/m with m of about 4e-26 kg (Na+) gives about 7e16 m/s^2, i.e. of order 1e17 rather than 1e18. */}
+
+<Callout type="note" title="Biological Connection: Electrostatics in Molecular Biology">
+
+- **Protein folding.** Oppositely charged amino acid side-chains form *salt bridges* — electrostatic bonds that stabilise the 3-D fold. Disrupting them (e.g., by changing pH, which alters charge states) causes protein denaturation.
+- **DNA double helix.** The phosphate groups on DNA's backbone carry a negative charge. The double helix is therefore strongly anionic; positively charged histone proteins wrap around it to compact it into chromatin.
+- **Enzyme–substrate binding.** Many enzymes use positively charged residues in their active site to attract negatively charged substrates.
+- **Drug design.** Drugs are often designed with specific charge distributions to dock electrostatically with their target protein.
+
+</Callout>
+
+## 2. Electric Field and Electric Potential
+
+### 2.1 Electric Field
+
+<Callout type="definition" title="Definition: Electric Field">
+
+The electric field $\vec{E}$ at a point in space is the force per unit positive test charge placed at that point:
+
+$$
+\vec{E} = \frac{\vec{F}}{q}, \qquad \lvert\vec{E}\rvert = k_e\frac{\lvert Q\rvert}{r^2}
+$$
+
+Units: V/m (volts per metre) = N/C. Direction: outward from positive charges, inward toward negative charges.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Field Lines as a Map">
+
+Think of the electric field like a topographic map of a hillside. The hill (positive charge) pushes a ball (positive test charge) outward in all directions; a valley (negative charge) pulls it inward. Field lines show the direction a positive charge would naturally move — from high electric potential (hilltop) to low (valley). Where lines are dense, the field is strong; where they are sparse, it is weak.
+
+</Callout>
+
+### 2.2 Electric Potential
+
+<Callout type="note" title="Result: Electric Potential and Potential Difference">
+
+Electric potential $V$ at a distance $r$ from a point charge $Q$:
+
+$$
+V = k_e\frac{Q}{r}
+$$
+
+Units: Volts ($\mathrm{V} = \mathrm{J/C}$). The potential difference $\Delta V = V_B - V_A$ between two points is the work done per unit charge moving a positive charge from $A$ to $B$. A positive charge moves naturally from high to low potential (downhill); a negative charge moves from low to high.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Potential as Electrical Height">
+
+Electric potential is exactly analogous to gravitational height. A ball rolls downhill (from high gravitational PE to low). A positive ion drifts toward lower electric potential; a negative ion drifts toward higher potential. The membrane potential $V_m \approx -70\ \mathrm{mV}$ means the inside of the cell is 70 mV lower (more negative) than the outside. The inside is like a valley for positive ions, pulling them inward through any open channel.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Membrane Potential">
+
+The resting membrane potential of a typical neuron is $V_m \approx -70\ \mathrm{mV}$. This arises from the combined effect of:
+
+- The concentration gradient of ions (especially $\mathrm{K^+}$ high inside, $\mathrm{Na^+}$ high outside).
+- The electrical gradient pulling ions opposite to their concentration gradient.
+- The $\mathrm{Na^+/K^+}$-ATPase pump that actively restores gradients, consuming 1 ATP to move 3 $\mathrm{Na^+}$ out and 2 $\mathrm{K^+}$ in — net outward positive charge, maintaining the negative resting potential.
+
+At rest, the membrane is most permeable to $\mathrm{K^+}$ (through leak channels), so $V_m$ is close to but slightly above the $\mathrm{K^+}$ Nernst potential of $-90\ \mathrm{mV}$.
+
+</Callout>
+
+## 3. Capacitance and the Membrane as a Capacitor
+
+<Callout type="definition" title="Definition: Capacitance">
+
+A capacitor stores electric charge on two conducting surfaces separated by an insulator (dielectric). Capacitance $C$ is defined as:
+
+$$
+C = \frac{Q}{V}, \qquad [C] = \text{Farad (F)}
+$$
+
+For a parallel-plate capacitor of plate area $A$, plate separation $d$, and permittivity $\varepsilon = \varepsilon_0\varepsilon_r$:
+
+$$
+C = \varepsilon\frac{A}{d} = \varepsilon_0\varepsilon_r\frac{A}{d}
+$$
+
+where $\varepsilon_0 = 8.85\times10^{-12}\ \mathrm{F/m}$ and $\varepsilon_r$ is the relative permittivity of the insulating material.
+
+</Callout>
+
+<Callout type="note" title="Analogy: Capacitor as a Water Tank">
+
+Think of a capacitor as a water tank with a rubber membrane stretched across the middle. Water (charge) can accumulate on one side, stretching the membrane and building up pressure (voltage). The bigger the tank (larger $A$), the more water it holds at the same pressure — larger capacitance. The thicker the membrane (larger $d$), the harder it is to stretch — smaller capacitance.
+
+</Callout>
+
+<Callout type="note" title="Result: Energy Stored in a Capacitor">
+
+$$
+U = \tfrac{1}{2}CV^2 = \frac{Q^2}{2C} = \tfrac{1}{2}QV
+$$
+
+All three forms are equivalent; use whichever variables are given.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: The Cell Membrane as a Capacitor">
+
+The cell membrane is a phospholipid bilayer approximately 5–7 nm thick. On either side are conducting ionic solutions (cytoplasm inside, extracellular fluid outside). This is a textbook parallel-plate capacitor:
+
+- **Conductors:** intracellular and extracellular fluid.
+- **Insulator:** the hydrophobic lipid bilayer ($\varepsilon_r \approx 2$).
+- **Plate separation:** $d \approx 5\ \mathrm{nm}$.
+- **Specific capacitance:** $\approx 1\ \mu\mathrm{F/cm^2}$ — remarkably consistent across almost all cell types, suggesting it is set by the universal bilayer structure.
+
+**Why does capacitance matter for neurons?** When a voltage pulse arrives, the neuron must charge its membrane capacitor before the voltage can change. A larger membrane (more area $A$) has larger $C$, requiring more charge to change $V_m$ by the same amount — so large neurons respond more slowly. Myelination dramatically reduces effective $C$ by increasing $d$ (the myelin wrapping is a thick insulator), allowing rapid signal propagation.
+
+</Callout>
+
+{/* FLAG (check 1): the stated d of 5 nm and eps_r of 2 give about 0.35 uF/cm^2 from C = eps0 eps_r / d, not 1 uF/cm^2. */}
+
+{/* FLAG (check 2): "large neurons respond more slowly" holds only at fixed total R_m. With fixed specific properties, tau = r_m c_m does not depend on cell size. */}
+
+<Callout type="example" title="Example: Membrane Capacitance Calculation">
+
+A spherical cell of radius $r = 10\ \mu\mathrm{m}$ has membrane area $A = 4\pi r^2 = 4\pi(10^{-5})^2 = 1.26\times10^{-9}\ \mathrm{m^2} = 1.26\times10^{-5}\ \mathrm{cm^2}$.
+
+With specific capacitance $c_m = 1\ \mu\mathrm{F/cm^2}$:
+
+$$
+C_m = c_m \times A = 1\times10^{-6}\times 1.26\times10^{-5} = 1.26\times10^{-11}\ \mathrm{F} = 12.6\ \mathrm{pF}
+$$
+
+Energy stored at resting potential $V_m = 70\ \mathrm{mV}$:
+
+$$
+U = \tfrac{1}{2}C_m V_m^2 = \tfrac{1}{2}(1.26\times10^{-11})(0.07)^2 \approx 3.1\times10^{-14}\ \mathrm{J}
+$$
+
+This tiny energy must be restored after every action potential by the ATP-powered $\mathrm{Na^+/K^+}$ pump.
+
+</Callout>
+
+## Exercises
+
+{/* FLAG (pedagogy): A1 and A3 repeat the worked examples in sections 1.2 and 3 with the same numbers. */}
+
+### Part A: Mathematical Problems
+
+**A1. Coulomb's Law.** A $\mathrm{Na^+}$ ion ($+e$) and a $\mathrm{Cl^-}$ ion ($-e$) are separated by $r = 0.28\ \mathrm{nm}$ in aqueous solution (treat as free charges). Calculate the electrostatic force. Is it attractive or repulsive?
+
+**A2. Electric Potential.** A charge $Q = +5\times10^{-9}\ \mathrm{C}$ is fixed at the origin. Calculate the electric potential at $r = 5\ \mathrm{cm}$.
+
+**A3. Membrane Capacitance.** A spherical cell of radius $r = 10\ \mu\mathrm{m}$ has specific membrane capacitance $c_m = 1\ \mu\mathrm{F/cm^2}$. (a) Calculate the total membrane capacitance $C_m$. (b) How much charge $Q$ is stored at resting potential $V_m = 70\ \mathrm{mV}$? (c) Calculate the energy stored $U$.
+
+### Part B: Conceptual Questions
+
+**B1.** Why do membranes act as capacitors? Explain in terms of the physical structure of the lipid bilayer. What would happen to the capacitance if the bilayer became thinner (as in some genetic disorders)?
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Coulomb's Law | $F = k_e\lvert q_1 q_2\rvert/r^2$ |
+| Electric Field | $E = F/q = k_e Q/r^2$ |
+| Electric Potential | $V = k_e Q/r$ |
+| Capacitance | $C = Q/V = \varepsilon A/d$ |
+| Energy in capacitor | $U = \tfrac{1}{2}CV^2$ |

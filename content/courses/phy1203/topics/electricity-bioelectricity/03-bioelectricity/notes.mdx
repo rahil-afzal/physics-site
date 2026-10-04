@@ -1,0 +1,229 @@
+---
+type: lecture
+lecture: 3
+title: Bioelectricity
+status: developing
+---
+
+{/* Converted from Charges_Current.pdf (Lecture Notes: Electricity), part 3 of 3: source sections 7-9, exercises and references. Source text kept unchanged. Sections renumbered 7-9 to 1-3. Exercises renumbered: A1 = source A6, A2 = source A7, A3 = source A8, A4 = source A9, B1 = source B2, B2 = source B3, B3 = source B6, B4 = source B7. One cross-reference reworded, see EDIT. Possible physics problems are marked FLAG in comments like this one; none were silently corrected. Figures are placeholder slots. */}
+
+## 1. Ohmic Current and the Nernst Potential
+
+### 1.1 Ohmic (Driving-Force) Current Through Ion Channels
+
+The current through an ion channel is not simply $V/R$. What matters is not the membrane potential alone, but how far the membrane potential is from the equilibrium potential of that particular ion.
+
+<Callout type="note" title="Result: Ohmic Current Through an Ion Channel">
+
+$$
+I_x = g_x\,(V_m - E_x)
+$$
+
+- $I_x$ — current of ion $x$ (A); positive = outward current
+- $g_x$ — membrane conductance for ion $x$ ($\mathrm{S} = \mathrm{A/V}$ = siemens)
+- $V_m$ — membrane potential (V)
+- $E_x$ — Nernst (equilibrium) potential for ion $x$ (V)
+
+</Callout>
+
+<Callout type="note" title="Analogy: Driving Force as Net Pressure">
+
+Think of ion current like water through a pipe where both a pump (concentration gradient) and gravity (electrical gradient) are acting. If the pump exactly cancels gravity, there is no net flow — this is the equilibrium potential $E_x$. The quantity $(V_m - E_x)$ is the **driving force**: positive driving force pushes current out; negative pushes it in. Opening more channels (increasing $g_x$) amplifies whichever direction the driving force dictates.
+
+</Callout>
+
+<Callout type="note" title="Note: Sign Convention and Current Direction">
+
+- If $V_m > E_x$: driving force is positive, ion $x$ current is outward (leaving the cell, conventionally positive for a positive ion).
+- If $V_m < E_x$: driving force is negative, ion $x$ current is inward.
+- If $V_m = E_x$: driving force is zero; no net current even if many channels are open.
+
+This is why $\mathrm{Na^+}$ channels, once open during an action potential, drive the membrane toward $E_{\mathrm{Na}} \approx +60\ \mathrm{mV}$ and then current stops — it cannot overshoot the Nernst potential.
+
+</Callout>
+
+{/* FLAG (consistency): E_Na is given as about +60 mV here (section 1.1) but +67 mV in section 1.2 and section 2. */}
+
+### 1.2 The Nernst Potential
+
+<Callout type="note" title="Derivation: Why the Nernst Potential Exists">
+
+An ion $X$ is at equilibrium when two opposing tendencies exactly cancel:
+
+1. **Concentration gradient:** ion $X$ diffuses from high $[X]$ to low $[X]$ (random thermal motion).
+2. **Electrical gradient:** the membrane voltage creates an electric force opposing diffusion (since the diffusing ion carries charge).
+
+At equilibrium the electrochemical potential is equal on both sides. Setting the entropy-driven diffusion energy equal to the electrical work gives the Nernst equation.
+
+</Callout>
+
+<Callout type="note" title="Result: Nernst Equation">
+
+$$
+E_x = \frac{RT}{zF}\ln\frac{[X]_{\text{out}}}{[X]_{\text{in}}}
+$$
+
+- $R = 8.314\ \mathrm{J/(mol\,K)}$ — gas constant
+- $T$ — absolute temperature (K)
+- $z$ — ionic valence (e.g. $+1$ for $\mathrm{K^+}$, $-1$ for $\mathrm{Cl^-}$, $+2$ for $\mathrm{Ca^{2+}}$)
+- $F = 96{,}485\ \mathrm{C/mol}$ — Faraday constant
+
+At body temperature ($T = 310\ \mathrm{K}$), $RT/F \approx 26.7\ \mathrm{mV}$, so:
+
+$$
+E_x \approx \frac{26.7}{z}\ln\frac{[X]_{\text{out}}}{[X]_{\text{in}}}\ \mathrm{mV}
+\quad\text{or}\quad
+\frac{61.5}{z}\log_{10}\frac{[X]_{\text{out}}}{[X]_{\text{in}}}\ \mathrm{mV}
+$$
+
+</Callout>
+
+{/* EDIT (cross-reference): source said "from the table in Section 1"; reworded because that table is now in lecture 1 (Electrostatics, section 1.1). */}
+
+<Callout type="example" title="Example: Nernst Potentials for Key Ions at 310 K">
+
+Using intracellular and extracellular concentrations from the table in the Electrostatics lecture (Section 1.1):
+
+**Potassium** $\mathrm{K^+}$ ($z=+1$):
+
+$$
+E_{\mathrm{K}} = 26.7\ln\frac{5}{140} = 26.7\times(-3.332) \approx -89\ \mathrm{mV}
+$$
+
+**Sodium** $\mathrm{Na^+}$ ($z=+1$):
+
+$$
+E_{\mathrm{Na}} = 26.7\ln\frac{145}{12} = 26.7\times2.493 \approx +67\ \mathrm{mV}
+$$
+
+**Chloride** $\mathrm{Cl^-}$ ($z=-1$):
+
+$$
+E_{\mathrm{Cl}} = \frac{26.7}{-1}\ln\frac{116}{4} = -26.7\times3.367 \approx -90\ \mathrm{mV}
+$$
+
+**Calcium** $\mathrm{Ca^{2+}}$ ($z=+2$):
+
+$$
+E_{\mathrm{Ca}} = \frac{26.7}{2}\ln\frac{2}{0.0001} = 13.35\times9.903 \approx +132\ \mathrm{mV}
+$$
+
+The resting membrane potential ($-70\ \mathrm{mV}$) lies between $E_{\mathrm{K}}$ and $E_{\mathrm{Na}}$, pulled toward $E_{\mathrm{K}}$ by the high resting $\mathrm{K^+}$ permeability.
+
+</Callout>
+
+<Figure caption="Nernst potentials of K⁺, Cl⁻, Na⁺ and Ca²⁺ compared with the resting membrane potential (bar chart from the source notes)." />
+
+<Callout type="note" title="Biological Connection: Goldman Equation — Extending the Nernst Equation">
+
+The resting membrane potential is not set by a single ion but by all permeable ions simultaneously. The Goldman–Hodgkin–Katz (GHK) equation generalises the Nernst equation:
+
+$$
+V_m = \frac{RT}{F}\ln\frac{P_{\mathrm{K}}[\mathrm{K^+}]_o + P_{\mathrm{Na}}[\mathrm{Na^+}]_o + P_{\mathrm{Cl}}[\mathrm{Cl^-}]_i}{P_{\mathrm{K}}[\mathrm{K^+}]_i + P_{\mathrm{Na}}[\mathrm{Na^+}]_i + P_{\mathrm{Cl}}[\mathrm{Cl^-}]_o}
+$$
+
+where $P_x$ is the permeability of ion $x$. At rest, $P_{\mathrm{K}} \gg P_{\mathrm{Na}}$, so $V_m \approx E_{\mathrm{K}}$. During an action potential, $\mathrm{Na^+}$ channels open, $P_{\mathrm{Na}}$ surges, and $V_m$ shifts rapidly toward $E_{\mathrm{Na}} \approx +67\ \mathrm{mV}$. This is the physical basis of the depolarisation phase.
+
+</Callout>
+
+## 2. Action Potential and Ion Dynamics
+
+The action potential (AP) is the neuron's binary signal — an all-or-nothing electrical event that propagates without decrement along the axon. It is the physical implementation of neural computation.
+
+<Callout type="note" title="Note: All-or-Nothing Principle">
+
+If a stimulus depolarises the membrane beyond the threshold ($\approx -55\ \mathrm{mV}$), a full action potential fires. A smaller stimulus produces no AP at all. The AP amplitude is always the same ($\approx 110\ \mathrm{mV}$ swing). Information is encoded not in AP amplitude but in firing rate and temporal pattern.
+
+</Callout>
+
+### 2.1 Five Phases of the Action Potential
+
+**Phase 1. Resting state** ($V_m \approx -70\ \mathrm{mV}$). $\mathrm{Na^+}$ and $\mathrm{K^+}$ voltage-gated channels are closed. Only leak $\mathrm{K^+}$ channels are open, maintaining resting potential near $E_{\mathrm{K}}$.
+
+**Phase 2. Depolarisation.** A stimulus raises $V_m$ above threshold ($-55\ \mathrm{mV}$). Voltage-gated $\mathrm{Na^+}$ channels open (positive feedback: more depolarisation $\Rightarrow$ more channels open $\Rightarrow$ more depolarisation — the *Hodgkin cycle*). $V_m$ swings rapidly toward $E_{\mathrm{Na}} \approx +67\ \mathrm{mV}$, reaching $\approx +40\ \mathrm{mV}$.
+
+**Phase 3. Repolarisation.** $\mathrm{Na^+}$ channels inactivate (a separate gate closes from the cytoplasmic side). Voltage-gated $\mathrm{K^+}$ channels open (they respond to depolarisation but with a time delay). $\mathrm{K^+}$ rushes out, pulling $V_m$ back toward $E_{\mathrm{K}} \approx -89\ \mathrm{mV}$.
+
+**Phase 4. Hyperpolarisation (after-potential).** $\mathrm{K^+}$ channels close slowly. The excess $\mathrm{K^+}$ efflux temporarily drives $V_m$ below resting potential to $\approx -80\ \mathrm{mV}$.
+
+**Phase 5. Return to rest.** $\mathrm{K^+}$ channels finally close; the $\mathrm{Na^+/K^+}$-ATPase pump restores ion gradients over milliseconds to seconds.
+
+<Figure caption="Action potential waveform, membrane potential (mV) against time (ms), with threshold at −55 mV, rest at −70 mV, and the five phases labelled (figure from the source notes)." />
+
+<Callout type="note" title="Biological Connection: Refractory Period and Signal Directionality">
+
+During and shortly after an AP, the membrane cannot fire again. The **absolute refractory period** ($\sim1\ \mathrm{ms}$) corresponds to $\mathrm{Na^+}$ channel inactivation — the channels are physically blocked and cannot reopen regardless of stimulus strength. The **relative refractory period** ($\sim2$–$4\ \mathrm{ms}$) corresponds to $\mathrm{K^+}$ channels still open and $V_m$ below resting — a stronger stimulus is needed to reach threshold.
+
+The refractory period is biologically crucial: it limits maximum firing rate ($\sim500$–$1000\ \mathrm{Hz}$) and ensures APs propagate only forward along the axon — the region just behind the AP front is refractory and cannot re-fire.
+
+</Callout>
+
+<Callout type="note" title="Biological Connection: Myelination and Saltatory Conduction">
+
+Unmyelinated axons conduct APs at 0.5–2 m/s. Myelin (produced by Schwann cells in the PNS and oligodendrocytes in the CNS) wraps around the axon in concentric layers, dramatically increasing effective membrane resistance and decreasing capacitance — both of which speed conduction. The AP jumps between exposed nodes of Ranvier at 70–120 m/s — a 50–100$\times$ speedup.
+
+In multiple sclerosis, demyelination slows or blocks conduction, producing the characteristic symptoms of muscle weakness, visual disturbance, and fatigue.
+
+</Callout>
+
+## 3. The Hodgkin–Huxley Equivalent Circuit
+
+Alan Hodgkin and Andrew Huxley (Nobel Prize 1963) described the neuron membrane as an electrical circuit. This model remains the gold standard of computational neuroscience.
+
+<Figure caption="Hodgkin–Huxley equivalent circuit between outside and inside: membrane capacitance C_m in parallel with the branches g_Na (with E_Na), g_K (with E_K) and g_L (with E_L). g_Na and g_K are time-varying; g_L is constant. V_m is the voltage across the circuit (figure from the source notes)." />
+
+<Callout type="note" title="Note: Reading the HH Circuit">
+
+- $C_m$: membrane capacitance (lipid bilayer).
+- $g_{\mathrm{Na}}(t)$: time-varying $\mathrm{Na^+}$ conductance (voltage-gated channels).
+- $g_{\mathrm{K}}(t)$: time-varying $\mathrm{K^+}$ conductance.
+- $E_{\mathrm{Na}}$, $E_{\mathrm{K}}$: batteries representing Nernst potentials — the source of energy driving ion currents.
+- $V_m$: voltage across the capacitor (membrane potential).
+
+The circuit equation is:
+
+$$
+C_m\frac{dV_m}{dt} = -g_{\mathrm{Na}}(V_m - E_{\mathrm{Na}}) - g_{\mathrm{K}}(V_m - E_{\mathrm{K}}) - g_L(V_m - E_L) + I_{\text{ext}}
+$$
+
+where $g_L$ is the leak conductance and $I_{\text{ext}}$ is any applied current. This single equation generates the complete action potential waveform when $g_{\mathrm{Na}}$ and $g_{\mathrm{K}}$ are described by Hodgkin–Huxley kinetics.
+
+</Callout>
+
+## Exercises
+
+{/* FLAG (pedagogy): A2 and A3 repeat the worked example in section 1.2 with the same numbers. */}
+
+### Part A: Mathematical Problems
+
+**A1. Power Dissipation.** An ion channel carries a current $I = 50\ \mathrm{pA}$ at a driving force of $V_m - E_x = -65\ \mathrm{mV}$. Calculate the power dissipated.
+
+**A2. Nernst Potential.** Calculate the Nernst potential for $\mathrm{K^+}$ at $T = 310\ \mathrm{K}$, given $[\mathrm{K^+}]_{\text{in}} = 140\ \mathrm{mM}$ and $[\mathrm{K^+}]_{\text{out}} = 5\ \mathrm{mM}$.
+
+**A3. Nernst Potential — Calcium.** $\mathrm{Ca^{2+}}$ has $[\mathrm{Ca^{2+}}]_{\text{in}} = 0.0001\ \mathrm{mM}$ and $[\mathrm{Ca^{2+}}]_{\text{out}} = 2\ \mathrm{mM}$ at $T = 310\ \mathrm{K}$. Calculate $E_{\mathrm{Ca}}$.
+
+**A4. Ohmic Current.** A membrane has $\mathrm{K^+}$ conductance $g_{\mathrm{K}} = 5\ \mathrm{nS}$ and $E_{\mathrm{K}} = -90\ \mathrm{mV}$. If $V_m = -70\ \mathrm{mV}$: (a) Calculate $I_{\mathrm{K}}$. (b) State the direction of $\mathrm{K^+}$ current (inward or outward).
+
+### Part B: Conceptual Questions
+
+**B1.** Explain how the opening of $\mathrm{Na^+}$ channels during an action potential changes (a) membrane conductance, (b) membrane resistance, (c) the direction of ionic current. Use the driving force concept $(V_m - E_{\mathrm{Na}})$.
+
+**B2.** The Nernst potential for $\mathrm{K^+}$ is $\approx -90\ \mathrm{mV}$ and for $\mathrm{Na^+}$ is $\approx +67\ \mathrm{mV}$. The resting membrane potential is $\approx -70\ \mathrm{mV}$. Which ion is closer to equilibrium at rest? What does this imply about which ion carries most of the resting current?
+
+**B3.** During hyperpolarisation (Phase 4 of the action potential), the membrane potential briefly drops below $E_{\mathrm{K}}$. Use the driving force equation to explain why $\mathrm{K^+}$ current reverses direction during this phase.
+
+{/* FLAG (physics, premise of B3, source B6): the notes give the undershoot as about -80 mV and E_K as about -89 mV, so V_m stays above E_K. The driving force V_m - E_K stays positive and the K+ current stays outward (only smaller). It does not reverse. */}
+
+**B4.** The all-or-nothing principle states that APs are either full-size or absent. Yet neurons encode information about stimulus intensity. How is this possible?
+
+## Key Formula Summary
+
+| Quantity | Formula |
+|---|---|
+| Ion channel current | $I_x = g_x(V_m - E_x)$ |
+| Nernst Potential | $E_x = \dfrac{RT}{zF}\ln\dfrac{[X]_{\text{out}}}{[X]_{\text{in}}}$ |
+
+## References
+
+1. Hille, B. *Ion Channels of Excitable Membranes*, 3rd ed. Sinauer Associates, 2001. The definitive reference on ion channel biophysics. Chapters 1–4 cover the Nernst and Goldman equations, ohmic current, and channel conductance in authoritative detail. Essential reading for anyone serious about membrane electricity.
+2. Johnston, D. and Wu, S. M.-S. *Foundations of Cellular Neurophysiology*. MIT Press, 1995. An exceptionally clear textbook bridging physics and neurobiology. Chapters 2–6 derive the cable equation, the RC membrane model, action potential theory, and the Hodgkin–Huxley equations from first principles. Highly recommended for students who want to understand the mathematics behind the biology.
