@@ -1,0 +1,67 @@
+---
+type: lecture
+title: "Spring-Mass System and Simple Pendulum"
+description: "The SHM differential equation for the spring–mass system, initial conditions, and the simple pendulum in the small-angle limit."
+status: planned
+order: 2
+---
+
+## Learning Goals
+
+- Derive the SHM equation for the spring–mass system.
+- Use initial conditions to find the amplitude and phase.
+- Derive the simple-pendulum equation and state when the SHM model is valid.
+
+## Spring-mass system
+
+From this page the spring axis is called $x$, to match the examination papers; the solution has the same form as $y=A\sin\omega t$.
+
+$$F=-kx,\qquad m\ddot x=-kx\ \Rightarrow\ \ddot x+\omega_0^2x=0,\qquad \omega_0=\sqrt{\frac km},\qquad T=2\pi\sqrt{\frac mk}$$
+
+$$x=A\sin(\omega_0t+\varphi)$$
+
+### Derivation: the SHM equation
+
+From Newton's second law and Hooke's law. The sinusoidal solution is verified by substitution first; no advanced differential-equation methods are used.
+
+*(to be written)*
+
+## Initial conditions
+
+$$A=\sqrt{x_0^2+\frac{v_0^2}{\omega_0^2}},\qquad \tan\varphi=\frac{\omega_0x_0}{v_0},\qquad \omega_0^2=-\frac ax$$
+
+Release from rest at $x=A$ requires $\varphi=\pi/2$, so $x=A\cos\omega_0t$.
+
+<Callout type="note" title="Phase">
+Starting at $y=0$ gives $y=A\sin\omega t$, while many problems release the block from rest at the amplitude, which requires $\varphi=\pi/2$.
+</Callout>
+
+*(to be written)*
+
+## Simple pendulum
+
+$$mL\ddot\theta=-mg\sin\theta\ \xrightarrow{\ \sin\theta\approx\theta\ }\ \ddot\theta+\frac gL\theta=0,\qquad \omega=\sqrt{\frac gL},\qquad T=2\pi\sqrt{\frac Lg}$$
+
+### Derivation: the pendulum equation
+
+The tangential component of gravity is the restoring force; the small-angle approximation reduces the equation to the SHM form.
+
+The pendulum is only approximately SHM, valid for small angles. In that limit the period is independent of mass and amplitude.
+
+*(to be written)*
+
+## Worked Example
+
+*(to be written)*
+
+Problem types in this part of the course: $k$, $m$, $T$ relations; $\omega$ from given $x$ and $a$, then $v$ at that $x$; $\omega$ and $A$ from simultaneous $x$, $v$, $a$; writing $x(t)$ for release from rest at a given displacement; pendulum period, and the effect of changing $g$ or $L$.
+
+## Practice
+
+*(problem sheet to be supplied)*
+
+Past-paper questions on this topic: Mid 252 Q3c, Q4a; Final 253 Q1a, Q2b, Q2c, Q5a, Q5b(i); Final 261 Q2a, Q2c, Q4a. See [Practice problems](../../problems/) for the key.
+
+## Summary
+
+*(to be written)*

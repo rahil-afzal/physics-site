@@ -1,0 +1,61 @@
+---
+type: lecture
+title: "The Damped Equation and Its Regimes"
+description: "The equation of motion with a resistive force, the characteristic equation, and the conditions for the three damping regimes."
+status: planned
+order: 1
+---
+
+## Learning Goals
+
+- Derive the damped equation of motion and the regime conditions.
+- Classify an oscillator from $m$, $k$ and $b$.
+- Compute the critical value of $b$.
+
+<Callout type="warning" title="Provisional conventions">
+The damping constant is written $\gamma=b/2m$ here. The department's symbol, the definition of lifetime, and the sine or cosine form of the underdamped solution are still to be matched.
+</Callout>
+
+## Equation of motion
+
+$$m\ddot x+b\dot x+kx=0\ \Rightarrow\ \ddot x+2\gamma\dot x+\omega_0^2x=0,\qquad \gamma=\frac{b}{2m},\quad \omega_0^2=\frac km$$
+
+### Derivation: the damped equation
+
+From Newton's second law with the resistive force $F_d=-bv$.
+
+*(to be written)*
+
+## Characteristic equation
+
+$$x=e^{\lambda t}:\quad \lambda^2+2\gamma\lambda+\omega_0^2=0,\qquad \lambda=-\gamma\pm\sqrt{\gamma^2-\omega_0^2}$$
+
+*(to be written)*
+
+## The three regimes
+
+| Regime | Condition | Solution form |
+|---|---|---|
+| Underdamped (oscillatory) | $\gamma<\omega_0$, i.e. $b<2\sqrt{mk}$ | $x=A_0e^{-\gamma t}\sin(\omega' t+\varphi)$ |
+| Critically damped | $\gamma=\omega_0$, i.e. $b=2\sqrt{mk}$ | $x=(C_1+C_2t)e^{-\gamma t}$ |
+| Overdamped | $\gamma>\omega_0$, i.e. $b>2\sqrt{mk}$ | $x=C_1e^{\lambda_+t}+C_2e^{\lambda_-t}$, both $\lambda$ real and negative |
+
+The sign of $\gamma^2-\omega_0^2$ decides whether the roots are complex, repeated or real. Critical damping is the fastest return to equilibrium without oscillation. The solutions are stated here; the underdamped case is examined on the next page.
+
+*(to be written)*
+
+## Worked Example
+
+*(to be written)*
+
+Problem types in this part of the course: classify the regime from given $m$, $k$, $b$; compute the critical value of $b$.
+
+## Practice
+
+*(problem sheet to be supplied)*
+
+Past-paper questions on this topic: Final 252 Q4a; Final 253 Q1b, Q3b, Q4a; Final 261 Q5a. See [Practice problems](../../problems/) for the key.
+
+## Summary
+
+*(to be written)*
