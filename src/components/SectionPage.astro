@@ -1,0 +1,90 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import CourseNav from './CourseNav.astro';
+import Classification from './Classification.astro';
+import Status from './Status.astro';
+import ResourceLinks from './ResourceLinks.astro';
+import { getClassPlan, classesLabel, url, type Root, type Section } from '../lib/content';
+import { mdxComponents } from '../lib/mdx';
+
+interface Props { root: Root; section: Section }
+const { root, section } = Astro.props;
+const entry = root.sections[section]!;
+const d = entry.data;
+const code = root.entry.data.course_code ?? root.entry.data.title;
+const { Content } = await render(entry);
+
+const units = root.topics.filter((t) => t.entry?.data.unit);
+const plan = section === 'schedule' ? getClassPlan(root) : [];
+const phases = [['pre-midterm', 'Before the midterm'], ['post-midterm', 'After the midterm']] as const;
+const posts = section === 'announcements'
+  ? await Promise.all(root.announcements.map(async (e) => ({ e, Body: (await render(e)).Content })))
+  : [];
+const fmt = (x?: Date) => x?.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<Base title={`${d.title} · ${code}`} description={d.description}>
+  <div class="narrow">
+    <Breadcrumbs items={[{ label: code, href: root.href }, { label: d.title }]} />
+    <h1>{d.title}<Status status={d.status} /></h1>
+    {d.description && <p class="lede">{d.description}</p>}
+    <CourseNav root={root} current={section} />
+
+    {section === 'syllabus' && units.length > 0 && (
+      <section>
+        <h2>Units</h2>
+        <ol class="units">
+          {units.map((t) => (
+            <li>
+              <span class="unit-code">{t.entry?.data.unit}</span>
+              <a href={url(t.href)}>{t.title}</a><Classification value={t.entry?.data.classification} />
+              <div class="meta">
+                {[t.entry?.data.class_range ? `Classes ${t.entry.data.class_range}` : 'not scheduled', t.lectures.length > 0 ? `${t.lectures.length} topic page${t.lectures.length > 1 ? 's' : ''}` : 'no topic pages', t.entry?.data.description].filter(Boolean).join(' · ')}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    {section === 'schedule' && phases.map(([ph, label]) => {
+      const rows = plan.filter((c) => c.phase === ph);
+      return rows.length > 0 && (
+        <section>
+          <h2>{label}</h2>
+          <ol class="classes">
+            {rows.map((c) => (
+              <li id={`class-${c.n}`}>
+                <span class="cn">{c.n}</span>
+                <div>
+                  <p class="ct">{c.title}</p>
+                  <p class="meta">
+                    <span class="unit-code">{c.unit}</span><a href={url(c.unitTopic.href)}>{c.unitTopic.title}</a><Classification value={c.unitTopic.entry?.data.classification} />
+                  </p>
+                  {c.pages.length > 0 && <ul class="links" aria-label={`Topic pages for class ${c.n}`}>{c.pages.map((p) => <li><a href={url(p.href)}>{p.label}</a></li>)}</ul>}
+                  {c.note && <p class="muted note">{c.note}</p>}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      );
+    })}
+
+    {section === 'announcements' && (
+      posts.length === 0
+        ? <p class="muted">No announcements yet.</p>
+        : posts.map(({ e, Body }) => (
+          <article class="announcement">
+            <h2>{e.data.title}</h2>
+            <p class="meta">{fmt(e.data.date)}</p>
+            <div class="prose"><Body components={mdxComponents} /></div>
+          </article>
+        ))
+    )}
+
+    <div class="prose"><Content components={mdxComponents} /></div>
+    <ResourceLinks links={d.links} />
+  </div>
+</Base>

@@ -1,0 +1,14 @@
+---
+import { SECTIONS, url, type Root, type Section } from '../lib/content';
+interface Props { root: Root; current?: Section }
+const { root, current } = Astro.props;
+const items = SECTIONS.filter((s) => root.sections[s.key]);
+---
+{items.length > 0 && (
+  <nav class="course-nav" aria-label="Course sections">
+    <ul>
+      <li><a href={url(root.href)} aria-current={current ? undefined : 'page'}>Overview</a></li>
+      {items.map((s) => <li><a href={url(`${root.href}${s.key}/`)} aria-current={current === s.key ? 'page' : undefined}>{s.label}</a></li>)}
+    </ul>
+  </nav>
+)}

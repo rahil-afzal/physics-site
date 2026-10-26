@@ -1,0 +1,9 @@
+---
+// Syllabus classification flag. "core" is the default and shows nothing.
+const { value } = Astro.props;
+const hint = {
+  provisional: 'Scheduled, but the departmental requirement is not yet confirmed',
+  unresolved: 'Not scheduled; the departmental requirement is not yet confirmed',
+} as Record<string, string>;
+---
+{value && value !== 'core' && <span class="status status-flag" title={hint[value]}>{value}</span>}
