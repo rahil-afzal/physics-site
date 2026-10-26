@@ -8,7 +8,7 @@ const content = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './content' }),
   schema: z
     .object({
-      type: z.enum(['course', 'resource', 'topic', 'lecture', 'lab', 'problem']),
+      type: z.enum(['course', 'resource', 'topic', 'lecture', 'lab', 'problem', 'page', 'announcement']),
       title: z.string(),
       description: z.string().optional(),
       course_code: z.string().optional(),
@@ -17,6 +17,7 @@ const content = defineCollection({
       instructor: z.string().optional(),
       status: z.enum(['planned', 'developing', 'taught', 'archived']).optional(),
       order: z.number().optional(),
+      date: z.coerce.date().optional(), // announcements
       visibility: z.enum(['public', 'hidden']).default('public'),
       official_scope: z.array(z.string()).optional(),
       teaching_scope: z.array(z.string()).optional(),

@@ -4,6 +4,7 @@ import Base from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import Status from '../../../components/Status.astro';
 import ResourceLinks from '../../../components/ResourceLinks.astro';
+import CourseNav from '../../../components/CourseNav.astro';
 import { getTree, url } from '../../../lib/content';
 import { mdxComponents } from '../../../lib/mdx';
 
@@ -20,6 +21,7 @@ const rest = (d.official_scope ?? []).filter((s) => !taught.has(s));
   <div class="narrow">
     <Breadcrumbs items={[{ label: d.course_code ?? d.title }]} />
     <h1>{d.course_code ? `${d.course_code} — ` : ''}{d.title}<Status status={d.status} /></h1>
+    <CourseNav root={root} />
     <p class="meta">{[d.audience, d.term, d.instructor].filter(Boolean).join(' · ')}</p>
     {d.description && <p>{d.description}</p>}
     <div class="prose"><Content components={mdxComponents} /></div>
@@ -37,7 +39,7 @@ const rest = (d.official_scope ?? []).filter((s) => !taught.has(s));
       </section>
     )}
     <section>
-      <h2>Contents</h2>
+      <h2>{(d as { page_label?: string }).page_label ?? 'Contents'}</h2>
       {root.topics.length === 0 ? <p class="muted">No topics yet.</p> : (
         <ol class="contents">
           {root.topics.map((t) => (

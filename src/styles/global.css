@@ -47,3 +47,13 @@ figcaption{font:.88rem/1.5 var(--sans);color:var(--muted);margin-top:.6rem}
   .lecture-head{grid-area:head}.lecture-body{grid-area:body}
   .toc{grid-area:toc;position:sticky;top:4.5rem;align-self:start;max-height:calc(100vh - 6rem);overflow:auto;border:0;border-left:1px solid var(--rule);border-radius:0;margin:0;padding:0 0 0 1rem}
 }
+.course-nav ul{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;list-style:none;padding:0;margin:0 0 1.2rem;font:.9rem var(--sans);border-bottom:1px solid var(--rule);padding-bottom:.6rem}
+.course-nav a{text-decoration:none;color:var(--muted)}.course-nav a[aria-current=page]{color:var(--fg);font-weight:600}
+.status-flag{border-color:var(--accent);color:var(--accent)}
+.units,.classes{list-style:none;padding:0}
+.units>li{padding:.7rem 0;border-top:1px solid var(--rule)}
+.unit-code{font:600 .8rem var(--sans);color:var(--muted);margin-right:.6rem}
+.classes>li{display:flex;gap:1rem;padding:.8rem 0;border-top:1px solid var(--rule)}
+.cn{font:600 1.1rem var(--sans);color:var(--muted);min-width:2rem}
+.ct{margin:0;font-weight:600}.classes .meta{margin:.2rem 0 .4rem}.classes .links{margin:.2rem 0}.note{font-size:.9rem;margin:.3rem 0 0}
+.announcement{border-top:1px solid var(--rule);padding-top:1rem}

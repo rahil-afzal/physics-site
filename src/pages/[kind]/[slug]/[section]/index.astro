@@ -1,0 +1,14 @@
+---
+import SectionPage from '../../../../components/SectionPage.astro';
+import { getTree, SECTIONS } from '../../../../lib/content';
+
+export async function getStaticPaths() {
+  return (await getTree()).flatMap((root) =>
+    SECTIONS.filter((s) => root.sections[s.key]).map((s) => ({
+      params: { kind: root.kind, slug: root.slug, section: s.key },
+      props: { root, section: s.key },
+    })));
+}
+const { root, section } = Astro.props;
+---
+<SectionPage root={root} section={section} />
