@@ -1,0 +1,287 @@
+---
+type: lecture
+lecture: 3
+title: Muscle Torque and Joints
+status: developing
+---
+
+{/* Extends rot_osc.pdf (Rotational Dynamics, source section 3 "Muscles and Joints as Torque Engines" and exercises 11 and 13) into a full lecture on musculoskeletal torque, as requested. Segment masses, centre-of-mass positions and moment arms are typical textbook values, not measurements. Exercise 13 of the PDF does not say where the load is held; it is assumed here to be at the hand, 0.35 m from the elbow. */}
+
+## 1. Muscles Create Torque, Not Just Force
+
+### 1.1 Physical intuition
+
+A muscle can only **pull**. It attaches to a bone at a point close to a joint, so its pull acts at a small distance from the pivot. The joint turns because that pull has a **torque** about the joint axis. The body weight and any load in the hand pull the other way with their own torques.
+
+<Callout type="definition" title="Definition: Muscle Torque and Moment Arm">
+
+$$
+\tau_{\text{muscle}} = F_m\, d_\perp = F_m\, r\sin\phi, \qquad [\tau] = \mathrm{N\cdot m}
+$$
+
+- $F_m$: muscle force (N)
+- $r$: distance from the joint centre to the muscle's insertion point on the bone (m)
+- $\phi$: angle between the muscle's line of pull and the bone
+- $d_\perp = r\sin\phi$: the **moment arm** of the muscle (m)
+
+</Callout>
+
+<Callout type="warning" title="Caution: The Moment Arm Is Not the Insertion Distance">
+
+The moment arm is the *perpendicular* distance from the joint to the line of the muscle force. It equals the insertion distance $r$ only when the muscle pulls at 90° to the bone. As the joint angle changes, $\phi$ changes, so the moment arm (and the torque for a given muscle force) changes too.
+
+</Callout>
+
+## 2. The Elbow as a Torque Balance
+
+### 2.1 Static equilibrium
+
+If the forearm is held still, the net torque about the elbow is zero. Choosing the elbow as the pivot removes the unknown joint reaction force from the equation:
+
+$$
+\sum \tau_{\text{elbow}} = 0 \;\Rightarrow\; F_m\, d_\perp = W_{\text{load}}\, r_{\text{load}} \;(+\, W_{\text{forearm}}\, r_{cm})
+$$
+
+<Figure src="/figures/phy1203/rotational-dynamics/elbow-lever.svg" alt="Forearm held horizontal: biceps pulls up 5 cm from the elbow, a 25 N load pulls down 30 cm from the elbow." caption="Forearm held horizontal. The biceps force acts only 0.05 m from the elbow, while the load acts 0.30 m away." />
+
+<Callout type="example" title="Example: Forearm Equilibrium">
+
+A 25 N load is held 0.30 m from the elbow. The biceps pulls vertically 0.05 m from the elbow. Ignore the weight of the forearm itself.
+
+$$
+F_m \times 0.05 = 25 \times 0.30 \;\Rightarrow\; F_m = \frac{7.5}{0.05} = 150\ \text{N}
+$$
+
+The biceps must pull with **6 times** the load weight.
+
+</Callout>
+
+<Callout type="example" title="Example: Include the Weight of the Forearm">
+
+Forearm mass 1.5 kg, centre of mass 0.15 m from the elbow, so $W_f = 1.5 \times 9.8 = 14.7$ N. Add it to the previous example:
+
+$$
+F_m \times 0.05 = 25(0.30) + 14.7(0.15) = 7.5 + 2.2 = 9.7\ \text{N·m}
+\;\Rightarrow\; F_m = 194\ \text{N}
+$$
+
+Now the muscle force is about 7.8 times the load, and the forearm's own weight contributes about 23% of the torque. This is why muscle forces in the body are several times larger than the loads they support.
+
+</Callout>
+
+<Callout type="note" title="Why the Muscle Force Is So Large">
+
+The muscle's moment arm (0.05 m) is much smaller than the load's moment arm (0.30 m). Torque balance forces $F_m = W\,(r_{\text{load}}/d_\perp)$, so the ratio of the two arms (here 6) sets how much larger the muscle force must be.
+
+</Callout>
+
+## 3. Lever Systems and Mechanical Advantage
+
+### 3.1 Mechanical advantage
+
+A bone acting about a joint is a **lever**. It has a pivot (the joint), an effort (the muscle force $F_m$) and a load (weight $W$).
+
+<Callout type="definition" title="Definition: Mechanical Advantage">
+
+$$
+\text{MA} = \frac{W}{F_m} = \frac{d_{\text{effort}}}{d_{\text{load}}}
+$$
+
+where $d_{\text{effort}}$ is the muscle's moment arm and $d_{\text{load}}$ is the load's moment arm (both about the joint). MA is dimensionless.
+
+- MA > 1: the muscle needs less force than the load (force amplifier).
+- MA < 1: the muscle needs more force than the load (speed and range amplifier).
+
+</Callout>
+
+For the elbow example, $\text{MA} = 0.05/0.30 = 0.167$. The muscle is at a mechanical **disadvantage** of 6 to 1.
+
+<Callout type="note" title="The Trade-Off: Force Versus Speed">
+
+Because the hand is 6 times farther from the elbow than the biceps insertion, a small shortening of the muscle moves the hand six times as far, in the same time, six times as fast ($v = r\omega$ with the same $\omega$). Mechanical disadvantage in force is a **gain** in speed and range of motion. Energy is not created: the muscle does work $F_m\,\Delta x_m$ and the hand receives the same work $W\,\Delta x_{hand}$ (ignoring losses).
+
+</Callout>
+
+### 3.2 The three classes of lever
+
+| Class | Arrangement | Body example | MA |
+|---|---|---|---|
+| 1st | Pivot between effort and load | Neck: skull pivots on the atlas (neck extensors pull behind, skull weight in front) | can be > 1 or < 1 |
+| 2nd | Load between pivot and effort | Standing on tiptoe: ball of the foot is the pivot, body weight acts through the ankle, calf muscle pulls on the heel | > 1 |
+| 3rd | Effort between pivot and load | Elbow flexion by the biceps | < 1 |
+
+<Callout type="note" title="Which Class Dominates the Body?">
+
+Most skeletal lever systems are 3rd class. They sacrifice force for speed and reach, which suits fast limb movement. Class 2 (calf raise) is the main example with MA > 1: the muscle force is smaller than the force it supports at the ankle. It is still large (about twice body weight in the example below) because the ankle force includes the muscle's own pull.
+
+</Callout>
+
+<Callout type="example" title="Example: Standing on Tiptoe (Class 2)">
+
+A 700 N person stands on one foot on tiptoe. Treat the foot as the lever, pivoting at the ball of the foot. The ankle is 0.12 m from the pivot and the Achilles tendon attaches to the heel 0.18 m from the pivot. Forces on the foot: the floor pushes up with 700 N at the pivot (no torque), the Achilles pulls up with $T$ at the heel, and the shin bones push down with $J$ at the ankle.
+
+**Vertical balance:** $J = 700 + T$.
+
+**Torque about the pivot:** $T \times 0.18 = J \times 0.12 = (700 + T)(0.12)$
+
+$$
+0.06\,T = 84 \;\Rightarrow\; T = 1400\ \text{N}
+$$
+
+The Achilles tendon carries **2 times body weight**, and the shin pushes down on the foot with $J = 2100$ N. The lever has $\text{MA} = 0.18/0.12 = 1.5$ with respect to $J$, the load it actually carries ($T = J/1.5$). The load is larger than the weight of the body because the muscle's own pull adds to the joint force.
+
+</Callout>
+
+<Callout type="warning" title="Caution: Mechanical Advantage Is Not Efficiency">
+
+A lever never reduces the work required. MA trades force for distance. A "disadvantage" is not a defect. The elbow is built for speed.
+
+</Callout>
+
+## 4. Torque in Specific Joints
+
+### 4.1 Elbow: effect of the muscle angle and the arm position
+
+<Callout type="example" title="Example: Biceps at an Angle">
+
+A forearm (0.35 m long) holds a 4.0 kg mass at the hand (0.35 m from the elbow). The forearm itself has mass 2.2 kg, with its centre of mass 0.175 m from the elbow. The biceps inserts 0.05 m from the elbow and pulls at 70° to the forearm. The forearm is horizontal.
+
+**Step 1: load torque.** $W = 4.0 \times 9.8 = 39.2$ N, so $\tau_{\text{load}} = 39.2 \times 0.35 = 13.7$ N·m.
+
+**Step 2: forearm torque.** $W_f = 2.2 \times 9.8 = 21.6$ N, so $\tau_f = 21.6 \times 0.175 = 3.8$ N·m.
+
+**Step 3: total torque to balance.** $\tau = 13.7 + 3.8 = 17.5$ N·m.
+
+**Step 4: biceps force.** The moment arm is $d_\perp = 0.05 \sin 70^\circ = 0.047$ m, so
+
+$$
+F_m = \frac{17.5}{0.047} \approx 372\ \text{N}
+$$
+
+That is about 9.5 times the hand load, and is about 6% larger than it would be for a 90° pull ($17.5/0.05 = 350$ N).
+
+</Callout>
+
+<Callout type="example" title="Example: Lowering the Arm (Dynamic Case)">
+
+Same arm and 4.0 kg load. The arm is lowered from horizontal to 30° below horizontal in 0.4 s, starting from rest. Assume constant angular acceleration, and use the average angle (15° below horizontal) to estimate the gravity torque. Take downward rotation as positive.
+
+**Step 1: angle.** $\theta = 30^\circ = 0.524$ rad.
+
+**Step 2: acceleration.** $\theta = \tfrac12\alpha t^2 \Rightarrow \alpha = 2(0.524)/0.4^2 = 6.55\ \mathrm{rad/s^2}$.
+
+**Step 3: moment of inertia about the elbow.** Forearm (rod about its end) plus the load (point mass at 0.35 m):
+
+$$
+I = \tfrac13(2.2)(0.35)^2 + 4.0(0.35)^2 = 0.090 + 0.490 = 0.580\ \mathrm{kg\,m^2}
+$$
+
+**Step 4: net torque.** $\tau_{net} = I\alpha = 0.580 \times 6.55 = 3.80$ N·m.
+
+**Step 5: gravity torque.** The static torque in the previous example was 17.5 N·m at horizontal. At 15° below horizontal it is multiplied by $\cos 15^\circ = 0.966$: $\tau_g = 16.9$ N·m.
+
+**Step 6: muscle torque.** $\tau_{net} = \tau_g + \tau_{muscle} \Rightarrow \tau_{muscle} = 3.80 - 16.9 = -13.1$ N·m.
+
+The negative sign means the biceps provides an **upward** (braking) torque of 13.1 N·m. With moment arm $0.05\sin 70^\circ = 0.047$ m:
+
+$$
+F_m = \frac{13.1}{0.047} \approx 279\ \text{N}
+$$
+
+This is smaller than the 372 N needed to hold the arm still, because gravity is doing part of the job of accelerating the arm downward. The muscle is lengthening while it pulls, which is called an *eccentric* contraction.
+
+</Callout>
+
+### 4.2 Shoulder: holding the arm out sideways
+
+The deltoid inserts about 0.15 m from the shoulder joint, but pulls at only about 15° to the humerus, so its moment arm is small. Gravity acts on the whole arm at its centre of mass.
+
+<Callout type="example" title="Example: Arm Abducted to Horizontal">
+
+Arm mass 3.5 kg, centre of mass 0.30 m from the shoulder. Deltoid pull at 15° to the humerus, insertion 0.15 m from the joint.
+
+$\tau_{arm} = 3.5 \times 9.8 \times 0.30 = 10.3$ N·m.
+
+Moment arm $d_\perp = 0.15 \sin 15^\circ = 0.0388$ m.
+
+$$
+F_{\text{deltoid}} = \frac{10.3}{0.0388} \approx 265\ \text{N}
+$$
+
+That is about 7.7 times the arm's weight (34.3 N). Holding a 5 kg bag in the hand (0.65 m from the shoulder) would add $5 \times 9.8 \times 0.65 = 31.9$ N·m and raise the deltoid force to about $(10.3 + 31.9)/0.0388 \approx 1090$ N.
+
+</Callout>
+
+### 4.3 Knee: quadriceps and the patella
+
+When you extend the knee against a load (for example, a weight at the ankle), the quadriceps pull on the tibia through the patellar tendon, with a moment arm of about 0.04 m. The patella moves the tendon away from the joint centre and increases that moment arm.
+
+<Callout type="example" title="Example: Leg Extension with an Ankle Weight">
+
+A 5.0 kg ankle weight is held with the leg horizontal. The lower leg + foot has mass 4.0 kg, with its centre of mass 0.20 m from the knee. The weight is 0.45 m from the knee. The quadriceps moment arm is 0.04 m.
+
+$\tau = 5.0(9.8)(0.45) + 4.0(9.8)(0.20) = 22.1 + 7.8 = 29.9$ N·m.
+
+$$
+F_{quad} = \frac{29.9}{0.04} \approx 750\ \text{N}
+$$
+
+Without the patella, the moment arm would be smaller and the muscle force larger, so the knee cap acts as a mechanical advantage device.
+
+</Callout>
+
+<Callout type="warning" title="Caution: Joint Forces Are Larger Than the Muscle Forces Alone">
+
+The joint also supports the muscle's pull. In the elbow example the biceps force is 150–370 N. This pulls the forearm bone against the upper arm, so the joint compression is of the same order, much more than the weight held in the hand. This is why a small imbalance in muscle moment arms can overload cartilage and tendons.
+
+</Callout>
+
+## 5. Connections to Sports Science and Prosthetics
+
+Biomechanists measure joint torque $\tau$ and angular velocity $\omega$ during movement and compute the joint power $P = \tau\omega$ (see the next lecture). Prosthetic joints must match both the torque and the speed of the biological joint at every phase of the gait cycle. Physiotherapists use the same torque-balance reasoning to decide how to hold a weight, where to place a brace, and how to unload a painful joint.
+
+## Exercises
+
+### Part A: Mathematical
+
+1. A forearm holds a 25 N load 0.30 m from the elbow. The biceps inserts 0.05 m from the elbow and pulls vertically. Find the biceps force, ignoring the forearm weight.
+2. Repeat Exercise 1 with the load moved to 0.15 m. Comment on the result.
+3. A biceps pulls at 45° to the forearm, inserting 0.05 m from the elbow, with a required torque of 12 N·m. Find the muscle force.
+4. A 2.0 kg mass is held 0.40 m from the shoulder with the arm horizontal. The deltoid moment arm is 0.04 m. Find the deltoid force (ignore the arm weight).
+5. Find the mechanical advantage of a lever with effort arm 0.04 m and load arm 0.32 m. Which class is this likely to be in the body?
+6. Repeat the tiptoe example for a person of weight 800 N with pivot-to-ankle 0.12 m and pivot-to-heel 0.18 m. Find the Achilles force.
+
+<Callout type="note" title="Answers (Part A)">
+
+1. $F = 25 \times 0.30/0.05 = 150$ N.
+2. $F = 25 \times 0.15/0.05 = 75$ N. Halving the load distance halves the muscle force. Muscle force is proportional to the load's moment arm.
+3. $d_\perp = 0.05 \sin 45^\circ = 0.0354$ m; $F = 12/0.0354 = 339$ N.
+4. $\tau = 2.0(9.8)(0.40) = 7.84$ N·m; $F = 7.84/0.04 = 196$ N.
+5. $\text{MA} = 0.04/0.32 = 0.125$. It is a 3rd-class lever (effort between pivot and load), like the elbow.
+6. $0.06\,T = 0.12 \times 800 \Rightarrow T = 1600$ N, which is twice body weight.
+
+</Callout>
+
+### Part B: Conceptual
+
+1. Why does the biceps have to pull with several times the weight of the load held in the hand?
+2. How can the same muscle force produce a different torque at different joint angles?
+3. What does the elbow gain by working at a mechanical disadvantage?
+4. Why does the knee cap (patella) matter for the quadriceps?
+5. Why does holding a weight with the arm extended feel much heavier than holding it close to the body?
+
+## Key Formula Summary
+
+| Quantity | Formula | SI unit |
+|---|---|---|
+| Muscle torque | $\tau = F_m\, r\sin\phi = F_m d_\perp$ | N·m |
+| Static joint balance | $\sum\tau = 0$ about the joint | N·m |
+| Mechanical advantage | $\text{MA} = d_{\text{effort}}/d_{\text{load}} = W/F_m$ | dimensionless |
+| Joint power | $P = \tau\omega$ | W |
+
+## References
+
+- Taylor, J. R. *Classical Mechanics*. University Science Books, 2005.
+- Winter, D. A. *Biomechanics and Motor Control of Human Movement*, 4th ed. Wiley, 2009 (segment parameters and joint torques).
+
+

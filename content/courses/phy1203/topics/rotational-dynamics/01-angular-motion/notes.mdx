@@ -1,0 +1,200 @@
+---
+type: lecture
+lecture: 1
+title: Angular Motion
+status: developing
+---
+
+{/* Rewritten from rot_osc.pdf (Rotational Dynamics, source sections 1-2 and the kinematics exercises). Angular momentum (source section 5) is deliberately omitted. Centrifuge example: the PDF rounds to 374 rev; the exact value is 375 rev (average 25 rev/s x 15 s) and is used here. */}
+
+## 1. Why Study Rotation in Biology?
+
+Rotation appears at every scale of life:
+
+- **Bacterial flagella.** A proton-driven motor spins the flagellum at roughly 100–1000 rpm and pushes the cell through fluid.
+- **ATP synthase.** The F$_0$ subunit is a rotary motor. Protons flowing down their gradient turn a rotor at roughly 100 revolutions per second, and this drives ADP → ATP synthesis.
+- **Centrifugation.** Ultracentrifuges reach about 100 000 rpm and produce fields of order $5\times10^5\,g$. They separate organelles, viruses and macromolecules by density.
+- **Joints and limbs.** The elbow, shoulder and knee behave approximately like hinges. Muscles apply **torques** that rotate limb segments. This is the basis of biomechanics and physiotherapy.
+
+<Callout type="note" title="Roadmap">
+
+This topic builds up in four steps: (1) describing rotation (this lecture), (2) torque and moment of inertia, (3) how muscles produce torque at joints, and (4) rotational energy and power.
+
+</Callout>
+
+## 2. Describing Rotation
+
+### 2.1 Start from what you know
+
+Pick one point on a spinning wheel. It moves along a circle. Instead of tracking the distance travelled, it is easier to track the **angle** the wheel has turned. Every point on a rigid body turns through the same angle in the same time, so a single number describes the whole body.
+
+<Callout type="definition" title="Definition: Angular Displacement, Velocity and Acceleration">
+
+$$
+\theta = \text{angle turned from a reference } [\text{rad}], \qquad
+\omega = \frac{d\theta}{dt}\ [\mathrm{rad/s}], \qquad
+\alpha = \frac{d\omega}{dt}\ [\mathrm{rad/s^2}]
+$$
+
+The radian is dimensionless: $\theta = s/r$ (arc length divided by radius). One full turn is $2\pi$ rad $= 360^\circ$.
+
+</Callout>
+
+### 2.2 The Rotational–Linear Dictionary
+
+Every linear quantity has a rotational counterpart. Translate from the linear version instead of memorising new formulae.
+
+| Linear quantity | Symbol | Rotational counterpart | Symbol | SI unit (rotational) |
+|---|---|---|---|---|
+| Displacement | $x$ | Angular displacement | $\theta$ | rad |
+| Velocity | $v$ | Angular velocity | $\omega$ | rad/s |
+| Acceleration | $a$ | Angular acceleration | $\alpha$ | rad/s$^2$ |
+| Mass (inertia) | $m$ | Moment of inertia | $I$ | kg·m$^2$ |
+| Force | $F$ | Torque | $\tau$ | N·m |
+| Kinetic energy | $\tfrac12 mv^2$ | Rotational KE | $\tfrac12 I\omega^2$ | J |
+
+### 2.3 Link Between Angular and Linear Motion
+
+<Callout type="note" title="Result: Relations to Linear Motion">
+
+For a point at perpendicular distance $r$ from the axis:
+
+$$
+s = r\theta, \qquad v = r\omega, \qquad a_t = r\alpha
+$$
+
+Here $a_t$ is the **tangential** acceleration. A point in circular motion also has a centripetal acceleration $a_c = \omega^2 r$ directed towards the axis, which is not included in $a_t$.
+
+</Callout>
+
+<Callout type="note" title="Analogy: The Spinning Bicycle Wheel">
+
+All points on a wheel share the same $\omega$, but $v = r\omega$ grows with $r$: points near the hub move slowly, points on the rim move fastest. The same idea explains staggered starts on a running track. A runner on the outer lane has a longer arc to cover, so must run at a higher linear speed to finish the same angular journey in the same time.
+
+</Callout>
+
+<Callout type="note" title="Biological Application: Limb Tip Speed">
+
+During a leg swing the whole leg has one $\omega$ about the hip, so the foot (large $r$) moves much faster than the thigh (small $r$). At $\omega = 6$ rad/s, a point 0.9 m from the hip moves at $v = r\omega = 0.9 \times 6 = 5.4$ m/s, while a point 0.3 m from the hip moves at only $0.3 \times 6 = 1.8$ m/s.
+
+</Callout>
+
+<Callout type="warning" title="Caution: Common Misconceptions">
+
+- **"Angular velocity implies angular acceleration."** False. A wheel spinning at constant $\omega$ has $\alpha = 0$. (It still has centripetal acceleration.)
+- **Degrees in formulae.** $s = r\theta$, $v = r\omega$ and $a_t = r\alpha$ hold only when angles are in **radians**.
+- **"Rotation needs a force."** A force changes angular motion only through its **torque** (next lecture).
+
+</Callout>
+
+## 3. Kinematics for Constant Angular Acceleration
+
+### 3.1 Derivation
+
+Start from $\alpha = d\omega/dt = \text{constant}$ and integrate once:
+
+$$
+\omega(t) = \omega_0 + \alpha t
+$$
+
+Integrate again using $\omega = d\theta/dt$:
+
+$$
+\theta(t) = \omega_0 t + \tfrac12 \alpha t^2
+$$
+
+Eliminating $t$ (use $t = (\omega-\omega_0)/\alpha$) gives
+
+$$
+\omega^2 = \omega_0^2 + 2\alpha\theta
+$$
+
+<Callout type="note" title="Result: Rotational Kinematics (constant α)">
+
+$$
+\omega = \omega_0 + \alpha t, \qquad
+\theta = \omega_0 t + \tfrac12\alpha t^2, \qquad
+\omega^2 = \omega_0^2 + 2\alpha\theta
+$$
+
+These have the same form as $v = u + at$, $s = ut + \tfrac12 at^2$ and $v^2 = u^2 + 2as$.
+
+</Callout>
+
+### 3.2 Unit Conversion: rpm to rad/s
+
+One revolution is $2\pi$ rad and one minute is 60 s, so
+
+$$
+1\ \text{rpm} = \frac{2\pi}{60}\ \mathrm{rad/s} \approx 0.1047\ \mathrm{rad/s}
+$$
+
+<Callout type="example" title="Example: Centrifuge Spin-Up">
+
+A clinical centrifuge starts from rest and reaches 3000 rpm in 15 s with constant $\alpha$. Find $\alpha$ and the total number of revolutions.
+
+**Step 1: convert.** $\omega_f = 3000 \times \dfrac{2\pi}{60} = 100\pi \approx 314.2$ rad/s.
+
+**Step 2: angular acceleration.** $\alpha = \dfrac{\omega_f - \omega_0}{t} = \dfrac{314.2 - 0}{15} \approx 20.9\ \mathrm{rad/s^2}$.
+
+**Step 3: angle turned.** $\theta = \tfrac12\alpha t^2 = \tfrac12(20.94)(15)^2 \approx 2356$ rad.
+
+**Step 4: revolutions.** $N = \theta/2\pi \approx 375$ rev.
+
+**Check:** the average speed is 1500 rpm = 25 rev/s, and $25 \times 15 = 375$ rev. ✓
+
+</Callout>
+
+<Callout type="example" title="Example: Rim Speed of a Wheel">
+
+A bicycle wheel (radius 0.35 m) spins at 150 rpm. Then $\omega = 150 \times 0.1047 = 15.7$ rad/s and the rim speed is $v = r\omega = 0.35 \times 15.7 \approx 5.5$ m/s.
+
+</Callout>
+
+
+
+## Exercises
+
+### Part A: Mathematical
+
+1. A wheel starts from rest with $\alpha = 2.5\ \mathrm{rad/s^2}$. Find (a) $\omega$ after 6 s and (b) the angle turned.
+2. A microscope stage accelerates from 10 rad/s to 25 rad/s in 3 s. Find (a) $\alpha$ and (b) the angular displacement.
+3. A rotor completes 5 revolutions in 2 s. Find its angular velocity in rad/s.
+4. A ceiling fan accelerates from 0 to 300 rpm in 20 s. Find (a) $\alpha$ and (b) the number of revolutions.
+5. A fan slows from 25 rad/s to 5 rad/s in 10 s with constant deceleration. (a) Find the deceleration. (b) How many revolutions occur before it stops?
+6. A disc accelerates from rest to 18 000 rpm in 12 s. Find (a) $\alpha$ and (b) the revolutions.
+7. A centrifuge reaches 30 000 rpm in 20 s. Find (a) $\alpha$ and (b) the revolutions during spin-up.
+
+<Callout type="note" title="Answers (Part A)">
+
+1. (a) 15 rad/s; (b) 45 rad.
+2. (a) 5 rad/s$^2$; (b) 52.5 rad.
+3. $\omega = 5(2\pi)/2 = 5\pi \approx 15.7$ rad/s.
+4. (a) $\omega_f = 10\pi = 31.4$ rad/s, so $\alpha = 1.57\ \mathrm{rad/s^2}$; (b) $\theta = \tfrac12(31.4)(20) = 314$ rad $= 50$ rev.
+5. (a) $-2\ \mathrm{rad/s^2}$; (b) 150 rad (23.9 rev) while slowing to 5 rad/s. Continuing at the same deceleration to rest adds $5^2/(2\times 2) = 6.25$ rad. Total $= 156.25$ rad $\approx 24.9$ rev.
+6. (a) $18\,000$ rpm $= 1885$ rad/s, so $\alpha = 157\ \mathrm{rad/s^2}$; (b) $\theta = \tfrac12(1885)(12) \approx 11\,310$ rad $= 1800$ rev.
+7. (a) $30\,000$ rpm $= 3142$ rad/s, so $\alpha = 157\ \mathrm{rad/s^2}$; (b) $\theta = \tfrac12(3142)(20) \approx 31\,416$ rad $= 5000$ rev.
+
+</Callout>
+
+### Part B: Conceptual
+
+1. A student claims: "If a body has angular velocity, it must have angular acceleration." Is this always true? Give an example.
+2. Why does the foot of a swinging leg move faster than the knee, even though both share the same $\omega$?
+3. Why must the radian be used in $v = r\omega$?
+
+## Key Formula Summary
+
+| Quantity | Formula | SI unit |
+|---|---|---|
+| Arc length | $s = r\theta$ | m |
+| Linear speed | $v = r\omega$ | m/s |
+| Tangential acceleration | $a_t = r\alpha$ | m/s$^2$ |
+| Constant $\alpha$ | $\omega = \omega_0+\alpha t$; $\theta = \omega_0 t+\tfrac12\alpha t^2$; $\omega^2=\omega_0^2+2\alpha\theta$ | rad/s, rad |
+| rpm conversion | $1\ \text{rpm} = 2\pi/60$ rad/s | rad/s |
+
+## References
+
+- Taylor, J. R. *Classical Mechanics*. University Science Books, 2005 (rigid-body rotation).
+
+

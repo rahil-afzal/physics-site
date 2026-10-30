@@ -1,0 +1,249 @@
+---
+type: lecture
+lecture: 2
+title: Torque and Moment of Inertia
+status: developing
+---
+
+{/* Rewritten from rot_osc.pdf (Rotational Dynamics, source sections 3-4). Angular momentum (source section 5) is omitted on request. FLAG: the PDF says hollow bones give "bending stiffness" at low mass; bending stiffness depends on the area moment of inertia (integral of y^2 dA), a close cousin of the rotational moment of inertia. This is stated explicitly below. */}
+
+## 1. Torque: The Turning Effect of a Force
+
+### 1.1 Physical intuition
+
+Push a door near its hinge and it barely moves. Push at the handle, far from the hinge, and it swings easily. Push **along** the line towards the hinge and it does not turn at all. Rotation therefore depends on three things: how big the force is, **where** it acts, and **in which direction** it points.
+
+<Callout type="definition" title="Definition: Torque">
+
+$$
+\tau = r F \sin\theta = F\, r_\perp = F_\perp\, r, \qquad \vec\tau = \vec r \times \vec F, \qquad [\tau] = \mathrm{N\cdot m}
+$$
+
+- $r$: distance from the pivot to the point where the force acts (m)
+- $F$: force magnitude (N)
+- $\theta$: angle between $\vec r$ and $\vec F$
+- $r_\perp = r\sin\theta$: the **moment arm** (lever arm), the perpendicular distance from the pivot to the line of action of the force
+
+</Callout>
+
+<Callout type="note" title="Analogy: Door Hinges and Wrenches">
+
+The same force gives a larger torque the further from the pivot it is applied. That is why door handles sit far from the hinges, and why a longer spanner loosens a stubborn bolt more easily: same force, larger $r$, larger torque.
+
+</Callout>
+
+### 1.2 Sign convention and equilibrium
+
+Take anticlockwise torques as positive and clockwise as negative. A body does **not** start rotating (or change its rotation) when the net torque about the pivot is zero:
+
+$$
+\sum \tau = 0
+$$
+
+Torque depends on the **pivot chosen**. For a body in full equilibrium you may pick any pivot, and a clever choice (for example, the joint itself) removes the unknown joint force from the equation.
+
+<Callout type="warning" title="Caution: Torque Misconceptions">
+
+- **Torque is not force.** Its unit is N·m, not N. Although N·m has the same dimensions as the joule, torque is not an energy, so by convention we never write torque in joules.
+- **A big force can give zero torque.** If the line of action passes through the pivot, $r_\perp = 0$.
+- **Only the perpendicular component of force turns the body.** The component along the lever arm only loads the joint.
+
+</Callout>
+
+## 2. Newton's Second Law for Rotation
+
+### 2.1 Derivation for a single particle
+
+Take a particle of mass $m$ at distance $r$ from a fixed axis, pushed by a tangential force $F_t$. From $F_t = m a_t$ and $a_t = r\alpha$:
+
+$$
+F_t = m r \alpha
+$$
+
+Multiply both sides by $r$. The left side is the torque $\tau = r F_t$:
+
+$$
+\tau = (m r^2)\,\alpha
+$$
+
+For a rigid body made of many particles, sum over all of them. All particles share the same $\alpha$, and the internal forces between particles cancel in pairs (action and reaction produce equal and opposite torques):
+
+$$
+\tau_{\text{net}} = \Big(\sum_i m_i r_i^2\Big)\alpha = I\alpha
+$$
+
+<Callout type="note" title="Result: Newton's Second Law for Rotation">
+
+$$
+\tau_{\text{net}} = I\alpha
+$$
+
+Compare with $F_{\text{net}} = ma$. The moment of inertia $I$ plays the role of mass, and $\alpha$ plays the role of $a$.
+
+</Callout>
+
+## 3. Moment of Inertia: Rotational Mass
+
+<Callout type="definition" title="Definition: Moment of Inertia">
+
+$$
+I = \sum_i m_i r_i^2 \quad\text{(discrete masses)}, \qquad
+I = \int r^2\,dm \quad\text{(continuous body)}, \qquad [I] = \mathrm{kg\cdot m^2}
+$$
+
+$I$ measures how hard it is to change a body's rotation. It depends not only on the mass but also on **how the mass is distributed relative to the axis**. Mass far from the axis counts much more because of the $r^2$.
+
+</Callout>
+
+<Callout type="example" title="Example: Two Masses on a Light Rod">
+
+Two 0.5 kg masses sit at the ends of a light rod, 0.4 m from the axis (axis through the middle).
+
+$I = 2 \times (0.5)(0.4)^2 = 0.16\ \mathrm{kg\,m^2}$.
+
+Move each mass to 0.2 m: $I = 2 \times (0.5)(0.2)^2 = 0.04\ \mathrm{kg\,m^2}$. Halving the radius cuts $I$ by a factor of 4, so the same torque gives 4 times the angular acceleration.
+
+</Callout>
+
+<Callout type="note" title="Analogy: The Tightrope Walker">
+
+A tightrope walker carries a long pole. The pole puts mass far from the body's centre, which greatly increases $I$. A large $I$ means any small tipping torque gives only a small $\alpha = \tau/I$, which leaves time to correct.
+
+</Callout>
+
+### 3.1 Common shapes
+
+| Object | Axis | $I$ |
+|---|---|---|
+| Thin rod | Through centre, ⊥ length | $\tfrac{1}{12}ML^2$ |
+| Thin rod | Through end, ⊥ length | $\tfrac13 ML^2$ |
+| Solid cylinder / disc | Through centre | $\tfrac12 MR^2$ |
+| Hollow cylinder (thin-walled) | Through centre | $MR^2$ |
+| Solid sphere | Through centre | $\tfrac25 MR^2$ |
+| Hollow sphere (thin-walled) | Through centre | $\tfrac23 MR^2$ |
+| Thin hoop | About a diameter | $\tfrac12 MR^2$ |
+
+<Callout type="note" title="Physical Insight: Where the Mass Sits">
+
+A thin-walled hollow cylinder ($MR^2$) has twice the $I$ of a solid cylinder ($\tfrac12 MR^2$) with the same $M$ and $R$. All its mass is at the maximum radius.
+
+The same geometry explains why long bones are hollow tubes. Material near the centre of a cross-section contributes little to resisting bending, so a tube is nearly as stiff as a solid rod of the same outer diameter at much lower mass. (Bending stiffness depends on the *area* moment of inertia $\int y^2\,dA$, which uses the same "distance squared" idea.)
+
+</Callout>
+
+### 3.2 Parallel axis theorem
+
+<Callout type="note" title="Result: Parallel Axis Theorem">
+
+If $I_{cm}$ is the moment of inertia about an axis through the centre of mass, then about a parallel axis a distance $d$ away
+
+$$
+I = I_{cm} + Md^2
+$$
+
+The $Md^2$ term is always positive, so the centre-of-mass axis gives the smallest $I$ among parallel axes.
+
+</Callout>
+
+<Callout type="example" title="Example: Rod About Its End">
+
+For a uniform rod, $I_{cm} = \tfrac{1}{12}ML^2$. About one end, $d = L/2$:
+
+$$
+I_{end} = \tfrac{1}{12}ML^2 + M\left(\tfrac L2\right)^2 = \tfrac{1}{12}ML^2 + \tfrac{3}{12}ML^2 = \tfrac13 ML^2
+$$
+
+This is **4 times** $I_{cm}$. Swinging the rod about its end needs 4 times the torque for the same $\alpha$.
+
+</Callout>
+
+### 3.3 Perpendicular axis theorem
+
+<Callout type="note" title="Result: Perpendicular Axis Theorem (flat bodies only)">
+
+For a flat object in the $xy$-plane,
+
+$$
+I_z = I_x + I_y
+$$
+
+where $I_z$ is about the axis perpendicular to the plane and $I_x$, $I_y$ are about two perpendicular axes in the plane.
+
+</Callout>
+
+<Callout type="example" title="Example: Rectangular Plate">
+
+A uniform rectangular plate of mass $M$, side $L$ along $x$ and width $b$ along $y$. The axis in the plane along $x$ gives $I_x = \tfrac{1}{12}Mb^2$, and along $y$ gives $I_y = \tfrac{1}{12}ML^2$. Therefore
+
+$$
+I_z = \tfrac{1}{12}M(L^2 + b^2)
+$$
+
+</Callout>
+
+## 4. Biological Applications of Moment of Inertia
+
+<Callout type="example" title="Example: Swinging the Arm">
+
+Model an arm (mass $M = 3.5$ kg, length $L = 0.70$ m) as a uniform rod pivoting at the shoulder (the end).
+
+$$
+I = \tfrac13 ML^2 = \tfrac13 (3.5)(0.70)^2 = 0.572\ \mathrm{kg\,m^2}
+$$
+
+To give it $\alpha = 10\ \mathrm{rad/s^2}$ (ignoring gravity), the net torque must be $\tau = I\alpha = 0.572 \times 10 \approx 5.7$ N·m.
+
+</Callout>
+
+<Callout type="example" title="Example: Why Light Extremities Help Runners">
+
+Take 1.0 kg of limb mass. Placed in the thigh, 0.2 m from the hip, it contributes $I = mr^2 = 1.0 \times 0.2^2 = 0.04\ \mathrm{kg\,m^2}$. Placed in the foot, 0.8 m from the hip, it contributes $1.0 \times 0.8^2 = 0.64\ \mathrm{kg\,m^2}$, which is **16 times** more.
+
+Because $\tau = I\alpha$, every extra kilogram at the foot costs the hip muscles far more torque (and so more energy) on each swing than a kilogram near the hip. This is why running animals (horses, deer, cheetahs) have heavy muscles near the body and light, slender distal limbs, and why bird wings taper towards the tip.
+
+</Callout>
+
+## Exercises
+
+### Part A: Mathematical
+
+1. A 15 N force acts at 60° to a lever arm 0.5 m long. Find the torque.
+2. A horizontal bar (0.8 m) is pivoted at one end. A 12 N force acts at the free end at 30° to the bar. Find the torque.
+3. A spanner is 0.25 m long and you push perpendicular to it with 80 N. Find the torque. What force is needed for the same torque if you hold the spanner 0.10 m from the bolt?
+4. A uniform disc ($M = 2$ kg, $R = 0.10$ m) is spun by a net torque of 0.05 N·m. Find $\alpha$.
+5. A uniform rod (2 kg, 1.2 m) is pivoted at one end and released from horizontal. Find $\alpha$ just after release.
+6. A 0.80 kg rod of length 0.50 m is swung about its centre and then about its end. Compare the two moments of inertia.
+
+<Callout type="note" title="Answers (Part A)">
+
+1. $\tau = 15 \times 0.5 \times \sin 60^\circ = 6.5$ N·m.
+2. $\tau = 12 \times 0.8 \times \sin 30^\circ = 4.8$ N·m.
+3. $\tau = 0.25 \times 80 = 20$ N·m; $F = 20/0.10 = 200$ N.
+4. $I = \tfrac12 MR^2 = \tfrac12(2)(0.01) = 0.010\ \mathrm{kg\,m^2}$, so $\alpha = 0.05/0.010 = 5\ \mathrm{rad/s^2}$.
+5. $I = \tfrac13 ML^2 = \tfrac13(2)(1.44) = 0.96\ \mathrm{kg\,m^2}$; the weight acts at the centre, $\tau = mg\,(L/2) = 2(9.8)(0.6) = 11.76$ N·m; $\alpha = 11.76/0.96 = 12.25\ \mathrm{rad/s^2}$.
+6. $I_{cm} = \tfrac1{12}(0.80)(0.25) = 0.0167\ \mathrm{kg\,m^2}$; $I_{end} = \tfrac13(0.80)(0.25) = 0.0667\ \mathrm{kg\,m^2}$, four times larger.
+
+</Callout>
+
+### Part B: Conceptual
+
+1. Why does a force applied along the line towards the pivot produce no torque?
+2. Two bacterial flagella have the same length and mass, but one has its mass concentrated at the tip. Which needs more torque to spin at the same angular acceleration, and why?
+3. Why are lighter extremities an advantage for running animals?
+4. Why are bird wings tapered towards the tip?
+5. Why does a tightrope walker's long pole make balancing easier?
+
+## Key Formula Summary
+
+| Quantity | Formula | SI unit |
+|---|---|---|
+| Torque | $\tau = rF\sin\theta = F r_\perp$ | N·m |
+| Rotational Newton II | $\tau_{net} = I\alpha$ | N·m |
+| Moment of inertia | $I = \sum m_i r_i^2$ or $\int r^2\,dm$ | kg·m$^2$ |
+| Parallel axis | $I = I_{cm} + Md^2$ | kg·m$^2$ |
+| Perpendicular axis (flat) | $I_z = I_x + I_y$ | kg·m$^2$ |
+| Rod, end axis | $\tfrac13 ML^2$ | kg·m$^2$ |
+
+## References
+
+- Taylor, J. R. *Classical Mechanics*. University Science Books, 2005 (rigid-body rotation).
